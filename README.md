@@ -1,2 +1,3 @@
-# e-pitaka
-A Digital Payment System for Educational Institutions
+# e-Pitaka
+
+Digital Payment System for Educational Institutions
