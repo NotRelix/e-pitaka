@@ -14,7 +14,7 @@ Go to your Forked Repository, click on `Code`, and copy the URL as shown.
 
 In your terminal, navigate to the Directory you want it to be saved, and with the saved URL do the following:
 ```bash
-git clone (the_url_you_copied)
+git clone <the_url_you_copied>
 
 git clone https://github.com/NotRelix/e-pitaka.git    # Example
 cd e-pitaka                                           # Make that file the current directory
