@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Link, Routes, NavLink } from 'react-router-dom'
 import userLogo from '../assets/user.png'
 
 function Header() {
@@ -6,8 +7,8 @@ function Header() {
       <header>
         <h1>E-PITAKA</h1>
         <div className="links">
-          <a href="/">HELP</a>
-          <a href="/">SETTINGS</a>
+          <NavLink to="e-pitaka/">HELP</NavLink>
+          <NavLink to="e-pitaka/home">SETTINGS</NavLink>
           <img src={userLogo} alt="User" width="50px" />
         </div>
       </header>
