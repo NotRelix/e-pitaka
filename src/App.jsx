@@ -10,13 +10,15 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Header/>
-        <Routes>
-          <Route path="e-pitaka/" element={<SignIn/>}/>
-          <Route path="e-pitaka/home" element={<Home/>}/>
-        </Routes>
-      </BrowserRouter>
+      <div className="main-body">
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <Route path="e-pitaka/" element={<SignIn/>}/>
+            <Route path="e-pitaka/home" element={<Home/>}/>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   )
 }

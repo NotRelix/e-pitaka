@@ -1,8 +1,11 @@
+.main-body{
+  margin: 0 8%;
+}
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 8%;
 }
 
 .links {
