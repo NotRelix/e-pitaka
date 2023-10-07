@@ -7,7 +7,7 @@ function Header() {
       <header>
         <h1>E-PITAKA</h1>
         <div className="links">
-          <NavLink to="e-pitaka/">HELP</NavLink>
+          <NavLink to="e-pitaka/help">HELP</NavLink>
           <NavLink to="e-pitaka/home">SETTINGS</NavLink>
           <img src={userLogo} alt="User" width="50px" />
         </div>
