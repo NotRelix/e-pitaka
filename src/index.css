@@ -2,10 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
 
 
-:root {
+body {
   font-family: Quicksand, Outfit, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
   background: rgb(32,246,130);
   background: linear-gradient(90deg, rgba(32,246,130,1) 0%, rgba(55,219,230,1) 89%);
@@ -16,31 +15,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
 }
-
-a {
-  font-weight: 500;
-  color: white;
-  text-decoration: inherit;
-}
-
-/*
-a:hover {
-  color: #535bf2;
-}
-
- body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-} */
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+h3 {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 button {
@@ -63,7 +54,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -74,4 +65,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

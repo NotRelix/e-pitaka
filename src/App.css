@@ -13,3 +13,9 @@ header {
   align-items: center;
   gap: 20px;
 }
+
+.links a {
+  font-weight: 600;
+  color: white;
+  text-decoration: inherit;
+}

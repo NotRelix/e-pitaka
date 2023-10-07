@@ -6,15 +6,15 @@ function SignInForm() {
           <h3>SIGN IN</h3>
           <div className="input-area">
             <label>Your Institution</label>
-            <input type="text" />
+            <input type="text" className="form-control"/>
           </div>
           <div className="input-area">
             <label>Your Username</label>
-            <input type="text" />
+            <input type="text" className="form-control"/>
           </div>
           <div className="input-area">
             <label>Your Password</label>
-            <input type="text" />
+            <input type="password" className="form-control"/>
           </div>
           <button type="submit" className="sign-in-button">SIGN IN</button>
         </form>
