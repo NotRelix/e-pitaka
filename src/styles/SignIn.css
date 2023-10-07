@@ -7,6 +7,7 @@
   transform: translate(-50%, -50%);
   width: 70%;
   gap: 50px;
+  /* border: 2px solid white; */
 }
 
 .form-container{
@@ -60,4 +61,27 @@
   display: flex;
   flex-direction: column;
   text-align: center;
+  min-width: 450px;;
+}
+
+.sign-in-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 75px;
+}
+
+.sign-in-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-icon > img {
+  width: 50px;
+}
+
+.sign-in-icon > label {
+  margin-top: auto;
 }
