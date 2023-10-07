@@ -37,3 +37,8 @@
   .sign-up-container .sign-up-button:hover{
     opacity: 80%;
   }
+
+  .name-group {
+    display: flex;
+    justify-content: space-between;
+  }
