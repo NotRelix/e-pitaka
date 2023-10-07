@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Link, Routes, NavLink } from 'react-router-dom'
 import userLogo from '../assets/user.png'
 
-function Header() {
+function Navbar() {
   return (
     <>
       <header>
@@ -16,4 +16,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Navbar;
