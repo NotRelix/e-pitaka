@@ -2,31 +2,35 @@
   display: flex;
   position: absolute;
   justify-content: space-around;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  gap: 50px;
-  /* border: 2px solid white; */
+  align-items: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 50px;
 }
 
-.form-container{
+.sign-in-container>.row {
+  gap: 50px;
+}
+
+.form-container {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
   background-color: white;
   color: #414141;
   border-radius: 11px;
   text-align: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.250);
+  min-width: 350px;
 }
 
-.form-container h3{
+.form-container h3 {
   font-weight: 600;
   font-size: 30px;
 }
 
-.sign-in-button{
+.sign-in-button {
   background-color: rgb(71, 255, 156);
   color: white;
   margin: 15px 0px 30px;
@@ -36,21 +40,21 @@
   transition: 0.5s;
 }
 
-.sign-in-button:hover{
+.sign-in-button:hover {
   opacity: 80%;
 }
 
-.input-area{
+.input-area {
   text-align: left;
   margin: 20px;
 }
 
-.input-area label{
+.input-area label {
   font-size: 13px;
   display: block;
 }
 
-.input-area input{
+.input-area input {
   height: 32px;
   width: 300px;
   border-radius: 4px;
@@ -61,7 +65,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  min-width: 450px;;
+  min-width: 450px;
 }
 
 .sign-in-icons {
@@ -71,17 +75,22 @@
   gap: 75px;
 }
 
-.sign-in-icon {
+.icon-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-.sign-in-icon > img {
+.icon-container > label {
+  position: absolute;
+  top: 75px;
+}
+
+.down-arrow {
   width: 50px;
 }
 
-.sign-in-icon > label {
-  margin-top: auto;
+.sign-in-icon {
+  width: 75px;
 }
