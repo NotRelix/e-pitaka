@@ -8,13 +8,15 @@ function SignUpForm(){
             <label>Your Institution</label>
             <input type="text" className="form-control"/>
           </div>
-          <div className="input-area">
-            <label>First Name</label>
-            <input type="text"className="form-control"/>
-          </div>
-          <div className="input-area">
-            <label>Last Name</label>
-            <input type="text" className="form-control"/>
+          <div className="name-group">
+            <div className="input-area">
+              <label>First Name</label>
+              <input type="text" className="form-control" />
+            </div>
+            <div className="input-area">
+              <label>Last Name</label>
+              <input type="text" className="form-control" />
+            </div>
           </div>
           <div className="input-area">
             <label>Your Username</label>
