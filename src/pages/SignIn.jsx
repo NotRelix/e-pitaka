@@ -1,7 +1,13 @@
+import SignInForm from "../components/SignInForm";
+import '../styles/SignIn.css'
+
 function SignIn() {
   return (
       <>
-        <p>Sign in</p>
+        <div>
+          <SignInForm/>
+        </div>
+        
       </>
     );
 }
