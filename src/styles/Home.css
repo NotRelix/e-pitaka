@@ -83,7 +83,7 @@
     padding: 60px;
     align-items: center;
     justify-content: flex-start;
-    min-height: 500px;
+    height: 400px;
     position: sticky;
     bottom: 0;
   }
@@ -92,13 +92,14 @@
     display: flex;
     gap: 20px;
     justify-content: center;
-    min-height: 50vh; /* Adjust this value as needed */
+    min-height:max-content;
   }
   
-  /* Additional styles to prevent body overlap */
+
   html,
   body {
     height: 100%;
+    margin: 0;
   }
   
   #root {
