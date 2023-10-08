@@ -4,7 +4,7 @@ import "../styles/Home.css"
 function Home() {
     return (
       <>
-        <div>
+        <div className="home-container">
           <div className="current_box">
             <div className="current_inside">
               <div>
