@@ -8,7 +8,7 @@ function Navbar() {
         <h1>E-PITAKA</h1>
         <div className="links">
           <NavLink to="e-pitaka/help">HELP</NavLink>
-          <NavLink to="e-pitaka/home">SETTINGS</NavLink>
+          <NavLink to="e-pitaka/about-us">ABOUT US</NavLink>
           <img src={userLogo} alt="User" width="50px" />
         </div>
       </header>
