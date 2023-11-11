@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Help from './pages/Help'
+import Deposit from './pages/Deposit'
 import './App.css'
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="e-pitaka/sign-up" element={<SignUp/>}/>
             <Route path="e-pitaka/home" element={<Home/>}/>
             <Route path="e-pitaka/help" element={<Help/>}/>
+            <Route path="e-pitaka/deposit" element={<Deposit/>}/>
           </Routes>
         </BrowserRouter>
       </div>
