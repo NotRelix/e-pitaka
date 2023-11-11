@@ -1,0 +1,32 @@
+.line-color {
+  border-bottom: 2px solid #10B4B0;
+}
+
+.deposit-container {
+  border-radius: 20px;
+  height: 600px;
+}
+
+.deposit-title {
+  text-indent: 10px;
+  color: #10B4B0;
+}
+
+.deposit-text {
+  font-weight: bold;
+  text-indent: 30px;
+  color: #10B4B0;
+}
+
+.close-button {
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: 30px;
+  transform: translateY(-50%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+}
