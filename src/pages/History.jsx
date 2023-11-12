@@ -11,19 +11,19 @@ function History() {
           <img src={closeButton} className="close-button" />
         </div>
         <div className="card-body deposit-body">
-          <ul class="list-group list-group-flush">
+          <ul className="list-group list-group-flush">
             {historyData.map((transaction) => (
-              <li class="list-group-item transaction-container">
+              <li className="list-group-item transaction-container" key={transaction.id}>
                 {transaction.type ? (
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 transaction-value add">
+                  <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1 transaction-value add">
                       + {transaction.value.toLocaleString("en-US", {style:"currency", currency:"PHP"})}
                     </h5>
                     <small>From: Username</small>
                   </div>
                 ) : (
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1 transaction-value sub">
+                  <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1 transaction-value sub">
                       - {transaction.value.toLocaleString("en-US", {style:"currency", currency:"PHP"})}
                     </h5>
                     <small>To: Username</small>
