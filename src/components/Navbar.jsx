@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Link, Routes, NavLink } from 'react-router-dom'
-import userLogo from '../assets/user.png'
+import { BrowserRouter, Route, Link, Routes, NavLink } from "react-router-dom";
+import userLogo from "../assets/user.png";
 
 function Navbar() {
   return (
@@ -9,7 +9,7 @@ function Navbar() {
         <div className="links">
           <NavLink to="e-pitaka/help">HELP</NavLink>
           <NavLink to="e-pitaka/about-us">ABOUT US</NavLink>
-          <img src={userLogo} alt="User" width="50px" />
+          <NavLink to="e-pitaka/sign-up">SIGN UP</NavLink>
         </div>
       </header>
     </>
