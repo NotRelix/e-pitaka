@@ -1,0 +1,42 @@
+.line-color {
+  border-bottom: 2px solid #10B4B0;
+}
+
+.history-container {
+  border-radius: 20px; 
+}
+
+.history-title {
+  text-indent: 10px;
+  color: #10B4B0;
+}
+
+.close-button {
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: 30px;
+  transform: translateY(-50%);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+}
+
+.transaction-container{
+  padding: 13px 10px;
+}
+
+.transaction-value{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.sub{
+  color: red;
+}
+
+.add{
+  color: green;
+}
