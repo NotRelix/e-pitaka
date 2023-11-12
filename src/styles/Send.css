@@ -30,15 +30,16 @@
     margin-top: 20px;
   }
 
-.next-button {
+  .next-button {
     background-color: rgb(71, 255, 156);
     color: white;
     margin: 15px 0px 30px;
     padding: 10px;
-    width: 300px;
+    width: 30%;
     font-weight: 600;
     transition: 0.5s;
-}
+  }
+  
 
 .send-title {
     text-indent: 10px;
