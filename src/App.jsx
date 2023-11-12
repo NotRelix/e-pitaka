@@ -8,6 +8,7 @@ import Help from './pages/Help'
 import Deposit from './pages/Deposit'
 import AboutUs from './pages/AboutUs'
 import History from './pages/History'
+import Savings from './pages/Savings'
 import './App.css'
 
 function App() {
@@ -16,15 +17,16 @@ function App() {
     <>
       <div className="main-body">
         <BrowserRouter>
-          <Navbar/>
+          <Navbar />
           <Routes>
-            <Route path="e-pitaka/" element={<SignIn/>}/>
-            <Route path="e-pitaka/sign-up" element={<SignUp/>}/>
-            <Route path="e-pitaka/home" element={<Home/>}/>
-            <Route path="e-pitaka/help" element={<Help/>}/>
-            <Route path="e-pitaka/deposit" element={<Deposit/>}/>
-            <Route path="e-pitaka/about-us" element={<AboutUs/>}/>
-            <Route path="e-pitaka/history" element={<History/>}/>
+            <Route path="e-pitaka/" element={<SignIn />} />
+            <Route path="e-pitaka/sign-up" element={<SignUp />} />
+            <Route path="e-pitaka/home" element={<Home />} />
+            <Route path="e-pitaka/help" element={<Help />} />
+            <Route path="e-pitaka/deposit" element={<Deposit />} />
+            <Route path="e-pitaka/about-us" element={<AboutUs />} />
+            <Route path="e-pitaka/history" element={<History />} />
+            <Route path="e-pitaka/savings" element={<Savings />} />
           </Routes>
         </BrowserRouter>
       </div>
