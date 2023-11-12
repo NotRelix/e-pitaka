@@ -8,6 +8,7 @@ import Help from './pages/Help'
 import Deposit from './pages/Deposit'
 import AboutUs from './pages/AboutUs'
 import Send from './pages/Send'
+import History from './pages/History'
 import './App.css'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="e-pitaka/deposit" element={<Deposit/>}/>
             <Route path="e-pitaka/about-us" element={<AboutUs/>}/>
             <Route path="e-pitaka/send" element={<Send/>}/>
+            <Route path="e-pitaka/history" element={<History/>}/>
           </Routes>
         </BrowserRouter>
       </div>
