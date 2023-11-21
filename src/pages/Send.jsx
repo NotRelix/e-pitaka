@@ -1,13 +1,19 @@
 import '../styles/Send.css'
 import closeButton from '../assets/close_ring_light.png'
+import { useNavigate } from 'react-router-dom'
 
 function Send() {
+  const navigate = useNavigate()
+
+  const handleCloseClick = () => {
+    navigate('/e-pitaka/home')
+  }
   return (
     <>
       <div className="card send-container">
         <div className="card-header line-color send-title">
           <h1>SEND</h1>
-          <img src={closeButton} className='close-button' />
+          <img src={closeButton} className='close-button' onClick={handleCloseClick} />
         </div>
         <div className='card-body send-body'>
           <form>
