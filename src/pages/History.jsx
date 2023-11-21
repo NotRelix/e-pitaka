@@ -1,14 +1,20 @@
 import "../styles/History.css";
 import closeButton from "../assets/close_ring_light.png";
 import { historyData } from "../test/historyData.js";
+import { useNavigate } from "react-router-dom";
 
 function History() {
+  const navigate = useNavigate()
+
+  const handleCloseClick = () => {
+    navigate('/e-pitaka/home')
+  }
   return (
     <>
       <div className="card history-container">
         <div className="card-header line-color history-title">
           <h1>HISTORY</h1>
-          <img src={closeButton} className="close-button" />
+          <img src={closeButton} className="close-button" onClick={handleCloseClick} />
         </div>
         <div className="card-body deposit-body">
           <ul className="list-group list-group-flush">
