@@ -9,7 +9,7 @@ function SignInForm() {
             <input type="text" className="form-control"/>
           </div>
           <div className="input-area">
-            <label>Your Username</label>
+            <label>Your Email Address</label>
             <input type="text" className="form-control"/>
           </div>
           <div className="input-area">
