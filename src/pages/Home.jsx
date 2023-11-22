@@ -33,7 +33,7 @@ function Home() {
                     <h2 className="home_text">DEPOSIT</h2>
                 </button>
                 <button className="contain_box" onClick={() => navigate('/e-pitaka/send')}>
-                    <img className="image_home" src={send} alt="Send Fill" />``
+                    <img className="image_home" src={send} alt="Send Fill" />
                     <h2 className="home_text">SEND</h2>
                 </button>
                 <button className="contain_box" onClick={() => navigate('/e-pitaka/history')}>
