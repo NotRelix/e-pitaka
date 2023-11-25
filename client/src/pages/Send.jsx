@@ -40,7 +40,7 @@ function Send() {
               <textarea rows="8" className="input-box"></textarea>
             </div>
             <div className="button-container">
-              <button type="submit" className="next-button">
+              <button type="submit" className="next-button" onClick={() => navigate('/e-pitaka/send/confirm')}>
                 NEXT
               </button>
             </div>
