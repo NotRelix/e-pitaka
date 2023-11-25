@@ -9,7 +9,7 @@
   padding: 50px;
 }
 
-.sign-in-container>.row {
+.sign-in-container > .row {
   gap: 50px;
 }
 
@@ -21,7 +21,7 @@
   color: #414141;
   border-radius: 11px;
   text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.250);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   min-width: 350px;
 }
 

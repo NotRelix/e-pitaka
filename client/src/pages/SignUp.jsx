@@ -1,12 +1,12 @@
-import SignUpForm from "../components/SignUpForm"
-import '../styles/SignUp.css'
+import SignUpForm from "../components/SignUpForm";
+import "../styles/SignUp.css";
 
-function SignUp(){
-    return(
-        <div className="sign-up-container">
-            <SignUpForm/>
-        </div>
-    )
+function SignUp() {
+  return (
+    <div className="sign-up-container">
+      <SignUpForm />
+    </div>
+  );
 }
 
-export default SignUp
+export default SignUp;
