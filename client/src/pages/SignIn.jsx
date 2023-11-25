@@ -1,9 +1,9 @@
 import SignInForm from "../components/SignInForm";
-import down_arrow from "../assets/down_arrow.svg"
-import money from "../assets/money.svg"
-import send from "../assets/send.svg"
-import wallet from "../assets/wallet.svg"
-import '../styles/SignIn.css'
+import down_arrow from "../assets/down_arrow.svg";
+import money from "../assets/money.svg";
+import send from "../assets/send.svg";
+import wallet from "../assets/wallet.svg";
+import "../styles/SignIn.css";
 
 function SignIn() {
   return (
@@ -12,8 +12,15 @@ function SignIn() {
         <SignInForm />
         <div className="col page-header">
           <h1>THE BEST DIGITAL WALLET IN THE WORLD</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id vestibulum ex. </p>
-          <img src={down_arrow} className="down-arrow align-self-center" alt="" />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id
+            vestibulum ex.{" "}
+          </p>
+          <img
+            src={down_arrow}
+            className="down-arrow align-self-center"
+            alt=""
+          />
           <div className="sign-in-icons">
             <div className="icon-container">
               <img src={money} className="sign-in-icon" alt="" />
