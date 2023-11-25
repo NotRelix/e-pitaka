@@ -1,13 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 function SignUpForm() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="form-container">
         <form>
           <h3>CREATE ACCOUNT</h3>
-          <div className="input-area">
-            <label>Your Institution</label>
-            <input type="text" className="form-control" />
-          </div>
           <div className="name-group">
             <div className="input-area">
               <label>First Name</label>
@@ -30,7 +29,7 @@ function SignUpForm() {
             <label>Valid ID</label>
             <input type="file" className="form-control" />
           </div>
-          <button type="submit" className="sign-up-button">
+          <button type="submit" className="sign-up-button" onClick={() => navigate('/e-pitaka/home')}>
             SIGN UP
           </button>
         </form>
