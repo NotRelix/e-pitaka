@@ -12,7 +12,7 @@ function SignInForm({handleLogin}) {
             <input type="text" className="form-control" />
           </div> */}
           <div className="input-area">
-            <label>Your Email Address</label>
+            <label>Your Username</label>
             <input type="text" className="form-control" />
           </div>
           <div className="input-area">
