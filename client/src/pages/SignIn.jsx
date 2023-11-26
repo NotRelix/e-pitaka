@@ -8,7 +8,7 @@ import wallet from "../assets/wallet.svg";
 function SignIn() {
   return (
     <div className="container-fluid sign-in-container">
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-lg-4 order-1">
           <SignInForm />
         </div>

@@ -10,8 +10,11 @@
   margin: auto;
   color: #414141;
   padding: 20px 10px;
-  max-width: 360px;
   transition: 0.5s;
+}
+
+.sign-in-form{
+  max-width: 360px;
 }
 
 .form-container:hover{
@@ -62,7 +65,7 @@
 .info-header {
   font-weight: 600;
   font-size: 45px;
-  margin: 20px 0px;
+  margin-bottom: 20px;
 }
 
 .info-text{

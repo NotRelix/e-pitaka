@@ -4,7 +4,7 @@ function SignInForm() {
   const navigate = useNavigate()
   return (
     <>
-      <div className="card mb-3 text-center form-container">
+      <div className="card mb-3 text-center form-container sign-in-form">
         <form>
           <h3>SIGN IN</h3>
           {/* <div className="input-area">
