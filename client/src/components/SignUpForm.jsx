@@ -1,37 +1,51 @@
 import { useNavigate } from "react-router-dom";
+import '../styles/SignUp.css'
 
-function SignUpForm() {
+function SignUpForm({handleLogin}) {
   const navigate = useNavigate()
+  
   return (
     <>
-      <div className="form-container">
-        <form>
+      <div className="card text-center form-container sign-up-form">
+        <form onSubmit={() => {
+          navigate('/e-pitaka/home')
+          handleLogin()
+        }}>
           <h3>CREATE ACCOUNT</h3>
-          <div className="name-group">
-            <div className="input-area">
+          <div className="row input-area">
+            <div className="col-sm">
               <label>First Name</label>
               <input type="text" className="form-control" />
             </div>
-            <div className="input-area">
+            <div className=" col-sm">
               <label>Last Name</label>
               <input type="text" className="form-control" />
             </div>
           </div>
-          <div className="input-area">
-            <label>Your Username</label>
-            <input type="text" className="form-control" />
+
+          <div className="row input-area">
+            <div className="col">
+              <label>Your Username</label>
+              <input type="text" className="form-control" />
+            </div>
           </div>
-          <div className="input-area">
+          <div className=" row input-area">
+            <div className="col">
             <label>Your Password</label>
             <input type="password" className="form-control" />
+            </div>
           </div>
-          <div className="input-area">
+          <div className="row input-area">
+            <div className="col">
             <label>Valid ID</label>
             <input type="file" className="form-control" />
+            </div>
           </div>
-          <button type="submit" className="sign-up-button" onClick={() => navigate('/e-pitaka/home')}>
-            SIGN UP
-          </button>
+          <div className="row justify-content-center">
+            <button type="submit" className="sign-up-button">
+              SIGN UP
+            </button>
+          </div>
         </form>
       </div>
     </>

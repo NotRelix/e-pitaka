@@ -1,10 +1,10 @@
 import SignUpForm from "../components/SignUpForm";
 import "../styles/SignUp.css";
 
-function SignUp() {
+function SignUp({handleLogin}) {
   return (
     <div className="sign-up-container">
-      <SignUpForm />
+      <SignUpForm handleLogin={handleLogin}/>
     </div>
   );
 }

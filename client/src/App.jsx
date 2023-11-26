@@ -15,15 +15,35 @@ import Receipt from "./pages/Receipt";
 import "./App.css";
 
 function App() {
+  //temporary
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = (e) => {
+    setIsLoggedIn(!isLoggedIn);
+    console.log(isLoggedIn);
+  };
   return (
     <>
       <div className="main-body">
         <BrowserRouter>
-          <Navbar />
+          <Navbar isLoggedIn={isLoggedIn} />
           <Routes>
-            <Route path="e-pitaka/" element={<SignIn />} />
-            <Route path="e-pitaka/sign-up" element={<SignUp />} />
-            <Route path="e-pitaka/home" element={<Home />} />
+            <Route
+              path="e-pitaka/"
+              element={
+                isLoggedIn ? <Home /> : <SignIn handleLogin={handleLogin} />
+              }
+            />
+            <Route
+              path="e-pitaka/sign-up"
+              element={<SignUp handleLogin={handleLogin} />}
+            />
+            <Route
+              path="e-pitaka/home"
+              element={
+                isLoggedIn ? <Home /> : <SignIn handleLogin={handleLogin} />
+              }
+            />
             <Route path="e-pitaka/help" element={<Help />} />
             <Route path="e-pitaka/deposit" element={<Deposit />} />
             <Route path="e-pitaka/about-us" element={<AboutUs />} />
