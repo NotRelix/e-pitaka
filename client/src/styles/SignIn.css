@@ -1,12 +1,5 @@
 .sign-in-container {
-  display: flex;
-  position: absolute;
-  justify-content: space-around;
-  align-items: center;
-  left: 0;
-  right: 0;
-  width: 85%;
-  padding: 50px;
+  margin-top:  50px;
 }
 
 .sign-in-container > .row {
@@ -14,15 +7,15 @@
 }
 
 .form-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  background-color: white;
+  margin: auto;
   color: #414141;
-  border-radius: 11px;
-  text-align: center;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-  min-width: 350px;
+  padding: 20px 10px;
+  max-width: 360px;
+  transition: 0.5s;
+}
+
+.form-container:hover{
+  box-shadow: 0 0 10px rgba(68, 68, 68, 0.462);
 }
 
 .form-container h3 {
@@ -56,41 +49,41 @@
 
 .input-area input {
   height: 32px;
-  width: 300px;
+  width: 100%;
   border-radius: 4px;
   border: 1px solid #414141;
 }
 
-.page-header {
-  display: flex;
-  flex-direction: column;
+.info-container{
+  max-width: 900px;
   text-align: center;
-  min-width: 450px;
 }
 
-.sign-in-icons {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 75px;
+.info-header {
+  font-weight: 600;
+  font-size: 45px;
+  margin: 20px 0px;
 }
 
-.icon-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+.info-text{
+  font-size: 20px;
 }
 
-.icon-container > label {
-  position: absolute;
-  top: 75px;
+.sign-in-icons{
+  margin: 20px 0px;
+}
+
+
+.icon-label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sign-in-icon {
+  margin: auto;
+  width: 75px;
 }
 
 .down-arrow {
   width: 50px;
-}
-
-.sign-in-icon {
-  width: 75px;
 }

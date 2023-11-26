@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  margin: 10px 0px;
+}
+
+.web-logo{
+  font-weight: 600;
+  font-size: 55px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.link{
+  font-weight: 600;
+}
+
+@media screen and (max-width: 650px) {
+  .header {
+    flex-direction: column;
+  }
+}

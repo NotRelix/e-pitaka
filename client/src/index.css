@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
 
+
 body {
   font-family: Quicksand, Outfit, sans-serif;
   line-height: 1.5;
-  margin-bottom: 60px;
 
   background: rgb(32, 246, 130);
   background: linear-gradient(
@@ -19,6 +19,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  margin: 0 8%;
+  margin-bottom: 60px;
+  min-width: 350px;
 }
 
 h1 {
@@ -39,6 +43,7 @@ h3 {
 }
 
 button {
+  background-color: rgb(71, 255, 156);
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -49,24 +54,13 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
   opacity: 0.7;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+a{
+  color: white;
+  text-decoration: none;
+}

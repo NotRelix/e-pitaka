@@ -1,7 +1,7 @@
 function SignInForm() {
   return (
     <>
-      <div className="container col-3 form-container">
+      <div className="card mb-3 text-center form-container">
         <form>
           <h3>SIGN IN</h3>
           <div className="input-area">
