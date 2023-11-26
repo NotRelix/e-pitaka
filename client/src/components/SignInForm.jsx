@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-function SignInForm() {
-  const navigate = useNavigate()
+function SignInForm({handleLogin}) {
+  // const navigate = useNavigate()
   return (
     <>
       <div className="card mb-3 text-center form-container sign-in-form">
-        <form>
+        <form onSubmit = {() => handleLogin()}>
           <h3>SIGN IN</h3>
           {/* <div className="input-area">
             <label>Your Institution</label>

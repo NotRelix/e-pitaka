@@ -21,6 +21,10 @@
   font-weight: 600;
 }
 
+.user-profile-pic{
+  height: 50px;
+}
+
 @media screen and (max-width: 650px) {
   .header {
     flex-direction: column;

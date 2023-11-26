@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import '../styles/SignUp.css'
 
-function SignUpForm() {
+function SignUpForm({handleLogin}) {
   const navigate = useNavigate()
+  
   return (
     <>
       <div className="card text-center form-container sign-up-form">
-        <form>
+        <form onSubmit={() => {
+          navigate('/e-pitaka/home')
+          handleLogin()
+        }}>
           <h3>CREATE ACCOUNT</h3>
           <div className="row input-area">
             <div className="col-sm">
@@ -38,7 +42,7 @@ function SignUpForm() {
             </div>
           </div>
           <div className="row justify-content-center">
-            <button type="submit" className="sign-up-button" onClick={() => navigate('/e-pitaka/home')}>
+            <button type="submit" className="sign-up-button">
               SIGN UP
             </button>
           </div>
