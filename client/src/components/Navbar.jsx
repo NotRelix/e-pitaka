@@ -6,7 +6,7 @@ function Navbar({ isLoggedIn }) {
   return (
     <>
       <div className="header">
-        <NavLink className="web-logo" to="e-pitaka/">
+        <NavLink className="web-logo" to="e-pitaka/home">
           E-PITAKA
         </NavLink>
         <div className="header-right">
