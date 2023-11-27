@@ -8,10 +8,11 @@ import savings from "../assets/Wallet.png";
 import CurrBalance from "../components/CurrBalance.jsx";
 import PageButton from "../components/PageButton.jsx";
 
-function Home() {
+function Home({username}) {
   return (
     <>
       <div className="home-container">
+        <h1 className="text-center">Hi, {username}!</h1>
         <CurrBalance />
 
         <div>

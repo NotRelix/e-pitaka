@@ -1,19 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/SignUp.css';
 import axios from 'axios';
 
-function SignUpForm({ handleLogin }) {
+function SignUpForm({ handleLogin, setUsername }) {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
-  const [username, setUsername] = useState('');
+  const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
+  const [userExists, setUserExists] = useState(false)
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkUsername = async () => {
+      try {
+        const response = await axios.get(`http://127.0.0.1:3000/check-username/${username}`)
+        setUserExists(response.data.usernameExists)
+      } catch (error) {
+        console.error("Error checking username:", error)
+      }
+    }
+
+    if (username) {
+      checkUsername()
+    }
+  }, [username])
 
   // Called when the button with type="submit" inside the form is pressed
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (userExists) {
+      console.error("Username already exists. Please choose a different one.")
+      return
+    }
 
     const inputData = { fname, lname, username, password };
 
@@ -24,6 +45,7 @@ function SignUpForm({ handleLogin }) {
         'http://127.0.0.1:3000/sign-up',
         inputData
       );
+      setUsername(username)
       console.log('Server responded with:', data);
       navigate('/e-pitaka/home');
       handleLogin();
@@ -43,6 +65,7 @@ function SignUpForm({ handleLogin }) {
       <div className="card text-center form-container sign-up-form">
         <form onSubmit={handleSubmit}>
           <h3>CREATE ACCOUNT</h3>
+          {userExists ? <p className='text-danger'>Username Already Exists</p> : <p></p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>
@@ -52,6 +75,7 @@ function SignUpForm({ handleLogin }) {
                 }}
                 type="text"
                 className="form-control"
+                required
               />
             </div>
             <div className=" col-sm">
@@ -62,6 +86,7 @@ function SignUpForm({ handleLogin }) {
                 }}
                 type="text"
                 className="form-control"
+                required
               />
             </div>
           </div>
@@ -71,10 +96,11 @@ function SignUpForm({ handleLogin }) {
               <label>Your Username</label>
               <input
                 onChange={(e) => {
-                  handleChange(e, setUsername);
+                  handleChange(e, setUsernameLocal);
                 }}
                 type="text"
                 className="form-control"
+                required
               />
             </div>
           </div>
@@ -87,6 +113,7 @@ function SignUpForm({ handleLogin }) {
                 }}
                 type="password"
                 className="form-control"
+                required
               />
             </div>
           </div>

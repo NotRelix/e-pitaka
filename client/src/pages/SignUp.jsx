@@ -1,10 +1,13 @@
 import SignUpForm from "../components/SignUpForm";
 import "../styles/SignUp.css";
 
-function SignUp({handleLogin}) {
+function SignUp({handleLogin, setUsername}) {
   return (
     <div className="sign-up-container">
-      <SignUpForm handleLogin={handleLogin}/>
+      <SignUpForm
+        handleLogin={handleLogin}
+        setUsername={setUsername}
+      />
     </div>
   );
 }

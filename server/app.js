@@ -12,12 +12,29 @@ const conn = sql.createConnection({
   database: 'epitaka-db'
 })
 
-app.post('/sign-up', (req, res) => {
+const checkUsername = (username) => {
+  return new Promise((resolve, reject) => {
+    conn.query("SELECT * FROM `account` WHERE `Username` = ?", [username], (err, data) => {
+      if (err) {
+        console.error("Error Checking Username:", err);
+        reject(err);
+        return
+      }
+      resolve(data.length > 0)
+    })
+  }) 
+}
+
+app.post('/sign-up', async (req, res) => {
   // const [firstName, lastName, username, password] = req.body
   const firstName = req.body.fname
   const lastName = req.body.lname
   const username = req.body.username
   const password = req.body.password
+  const userExists = await checkUsername(username)
+  if (userExists) {
+    return ({ error: "User already Exists" })
+  }
   conn.query(
     "INSERT INTO `user` (`Fname`, `Lname`) VALUES (?, ?)",
     [firstName, lastName],
@@ -43,6 +60,20 @@ app.post('/sign-up', (req, res) => {
   console.log(req.body);
   res.json(req.body);
 });
+
+app.get('/check-username/:username', (req, res) => {
+  const username = req.params.username;
+  conn.query(
+    "SELECT * FROM `account` WHERE `Username` = ?", [username], (err, data) => {
+      if (err) {
+        console.error("Failed to Check for Username:", err);
+        return;
+      }
+      const usernameExists = data.length > 0
+      res.json({ usernameExists })
+    }
+  )
+})
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
