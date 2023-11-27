@@ -22,7 +22,7 @@ const checkUsername = (username) => {
       }
       resolve(data.length > 0)
     })
-  }) 
+  })
 }
 
 app.post('/sign-up', async (req, res) => {
@@ -69,8 +69,13 @@ app.get('/check-username/:username', (req, res) => {
         console.error("Failed to Check for Username:", err);
         return;
       }
-      const usernameExists = data.length > 0
-      res.json({ usernameExists })
+      const usernameExists = data.length > 0;
+      const userInfo = usernameExists
+        ? { username: data[0].Username, password: data[0].Password }
+        : null;
+      
+      console.log(userInfo)
+      res.json({ usernameExists, userInfo })
     }
   )
 })

@@ -5,12 +5,15 @@ import money from "../assets/money.svg";
 import send from "../assets/send.svg";
 import wallet from "../assets/wallet.svg";
 
-function SignIn({handleLogin}) {
+function SignIn({ handleLogin, setUsername }) {
   return (
     <div className="container-fluid sign-in-container">
       <div className="row justify-content-center">
         <div className="col-lg-4 order-1">
-          <SignInForm handleLogin = {handleLogin}/>
+          <SignInForm
+            handleLogin={handleLogin}
+            setUsername={setUsername}
+          />
         </div>
         <div className="col-lg-7 order-2 info-container">
           <div className="info-header">

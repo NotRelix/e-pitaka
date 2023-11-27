@@ -18,7 +18,6 @@ function App() {
   //temporary
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     setIsLoggedIn(!isLoggedIn);
@@ -34,7 +33,10 @@ function App() {
               path="e-pitaka/"
               element={isLoggedIn
                 ? <Home username={username} />
-                : <SignIn handleLogin={handleLogin} />}
+                : <SignIn
+                  handleLogin={handleLogin}
+                  setUsername={setUsername}
+                />}
             />
             <Route
               path="e-pitaka/sign-up"
@@ -46,7 +48,12 @@ function App() {
             <Route
               path="e-pitaka/home"
               element={
-                isLoggedIn ? <Home username={username} /> : <SignIn handleLogin={handleLogin} />
+                isLoggedIn
+                  ? <Home username={username} />
+                  : <SignIn
+                    handleLogin={handleLogin}
+                    setUsername={setUsername}
+                  />
               }
             />
             <Route path="e-pitaka/help" element={<Help />} />
