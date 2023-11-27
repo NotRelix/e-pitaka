@@ -8,22 +8,22 @@ function SignUpForm({ handleLogin, setUsername }) {
   const [lname, setLname] = useState('');
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
-  const [userExists, setUserExists] = useState(false)
+  const [userExists, setUserExists] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const checkUsername = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:3000/check-username/${username}`)
-        setUserExists(response.data.usernameExists)
+        const response = await axios.get(`http://127.0.0.1:3000/check-username/${username}`);
+        setUserExists(response.data.usernameExists);
       } catch (error) {
-        console.error("Error checking username:", error)
+        console.error("Error checking username:", error);
       }
     }
 
     if (username) {
-      checkUsername()
+      checkUsername();
     }
   }, [username])
 
@@ -32,8 +32,8 @@ function SignUpForm({ handleLogin, setUsername }) {
     e.preventDefault();
 
     if (userExists) {
-      console.error("Username already exists. Please choose a different one.")
-      return
+      console.error("Username already exists. Please choose a different one.");
+      return;
     }
 
     const inputData = { fname, lname, username, password };

@@ -46,7 +46,7 @@ function App() {
             <Route
               path="e-pitaka/home"
               element={
-                isLoggedIn ? <Home /> : <SignIn handleLogin={handleLogin} />
+                isLoggedIn ? <Home username={username} /> : <SignIn handleLogin={handleLogin} />
               }
             />
             <Route path="e-pitaka/help" element={<Help />} />
