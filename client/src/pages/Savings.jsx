@@ -14,12 +14,12 @@ function Savings() {
     <>
       <div className="card savings-container">
         <div className="card-header line-color">
-          <h1>SAVING</h1>
+          <h3>SAVINGS</h3>
           <img src={closeButton} alt="" onClick={handleCloseClick} />
         </div>
         <div className="card-body savings-body">
           <p>TOTAL SAVINGS:</p>
-          <h1>₱{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</h1>
+          <h3>₱{total.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</h3>
           <div className="chart">
             <h1>CHART</h1>
           </div>

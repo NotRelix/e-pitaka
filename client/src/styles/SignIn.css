@@ -17,10 +17,6 @@
   max-width: 360px;
 }
 
-.form-container:hover{
-  box-shadow: 0 0 10px rgba(68, 68, 68, 0.462);
-}
-
 .form-container h3 {
   font-weight: 600;
   font-size: 30px;
