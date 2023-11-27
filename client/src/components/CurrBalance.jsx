@@ -3,7 +3,7 @@ import view_hide from "../assets/View_hide.png";
 const CurrBalance = () => {
   return (
     <>
-      <div className="container balance-container">
+      <div className="card container balance-container">
         <div className="row balance-header">
           <div className="col">
             <h3>CURRENT BALANCE:</h3>

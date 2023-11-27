@@ -10,9 +10,9 @@ function Deposit() {
   };
   return (
     <>
-      <div className="card deposit-container">
-        <div className="card-header line-color deposit-title">
-          <h1>DEPOSIT</h1>
+      <div className="card page-container">
+        <div className="card-header line-color page-header">
+          <h3>DEPOSIT</h3>
           <img
             src={closeButton}
             className="close-button"
@@ -20,16 +20,12 @@ function Deposit() {
           />
         </div>
         <div className="card-body deposit-body">
-          <h3 className="deposit-text">STEP 1:</h3>
-          <p className="deposit-text">Go to your School's Teller.</p>
-          <h3 className="deposit-text">STEP 2:</h3>
-          <p className="deposit-text">
-            Enter your username and your amount you want to deposit.
-          </p>
-          <h3 className="deposit-text">STEP 3:</h3>
-          <p className="deposit-text">
-            Wait for the confirmation if the deposit is successful.
-          </p>
+          <h4>STEP 1:</h4>
+          <p>Go to your School's Teller.</p>
+          <h4>STEP 2:</h4>
+          <p>Enter your username and your amount you want to deposit.</p>
+          <h4>STEP 3:</h4>
+          <p>Wait for the confirmation if the deposit is successful.</p>
         </div>
       </div>
     </>

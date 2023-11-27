@@ -1,32 +1,41 @@
+.page-container{
+  margin: 20px auto;
+  max-width: 1000px;
+}
+
 .line-color {
-  border-bottom: 2px solid #10b4b0;
-}
-
-.deposit-container {
-  border-radius: 20px;
-  height: 600px;
-}
-
-.deposit-title {
-  text-indent: 10px;
-  color: #10b4b0;
-}
-
-.deposit-text {
-  font-weight: bold;
-  text-indent: 30px;
-  color: #10b4b0;
-}
-
-.close-button {
-  cursor: pointer;
-  margin-top: 40px;
-  margin-left: auto;
-  margin-right: 30px;
-  transform: translateY(-50%);
+  border-bottom: 1px solid #10b4b0;
 }
 
 .card-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  color: #10b4b0;
+  padding: 5px 25px;
+}
+
+.card-header h3{
+  font-size: 37px;
+}
+
+.close-button {
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+.deposit-body{
+  margin: 25px;
+}
+
+.deposit-body h4{
+  margin: 10px 0;
+  font-weight: 600;
+  font-size: 27px;
+  color: #10b4b0;
+}
+
+.deposit-body p{
+  font-size: 18px;
+  margin-bottom: 40px;
 }
