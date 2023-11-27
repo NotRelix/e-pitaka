@@ -1,18 +1,6 @@
-.savings-container {
-  border-radius: 20px;
-  /* max-width: 75%; */
+.savings-container{
+  max-width: 1500px;
   margin: auto;
-  color: #10b4b0;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 50px;
-}
-
-.line-color {
-  border-bottom: 2px solid #10b4b0;
 }
 
 .savings-body {
@@ -21,12 +9,13 @@
 
 .savings-body p {
   margin-top: 20px;
-  margin-bottom: 0;
-  font-size: x-large;
-  font-weight: 900;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.savings-body h1 {
+.savings-body h3 {
+  font-size: 40px;
   margin-top: 0;
 }
 
@@ -34,11 +23,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
-  border-radius: 20px;
+  border: 1px solid black;
   height: 350px;
-  max-width: 1300px;
   margin: auto;
   margin-bottom: 100px;
-  color: black;
+  color: #333;
 }

@@ -12,16 +12,16 @@ function History() {
   return (
     <>
       <div className="card history-container">
-        <div className="card-header line-color history-title">
-          <h1>HISTORY</h1>
+        <div className="card-header line-color">
+          <h3>HISTORY</h3>
           <img
             src={closeButton}
             className="close-button"
             onClick={handleCloseClick}
           />
         </div>
-        <div className="card-body deposit-body">
-          <ul className="list-group list-group-flush">
+        <div className="card-body">
+          <ul className="list-group list-group-flush transaction-list">
             {historyData.map((transaction) => (
               <li
                 className="list-group-item transaction-container"

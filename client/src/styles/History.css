@@ -1,14 +1,6 @@
-.line-color {
-  border-bottom: 2px solid #10b4b0;
-}
-
-.history-container {
-  border-radius: 20px;
-}
-
-.history-title {
-  text-indent: 10px;
-  color: #10b4b0;
+.history-container{
+  max-width: 1500px;
+  margin: auto;
 }
 
 .close-button {
@@ -19,17 +11,16 @@
   transform: translateY(-50%);
 }
 
-.card-header {
-  display: flex;
-  align-items: center;
-}
-
 .transaction-container {
   padding: 13px 10px;
 }
 
+.transaction-container:hover{
+  background-color: #cdcdcd23;
+}
+
 .transaction-value {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
 }
 

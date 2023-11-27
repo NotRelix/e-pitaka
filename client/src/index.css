@@ -25,6 +25,7 @@ body {
   min-width: 350px;
 }
 
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -36,6 +37,7 @@ h1 {
 }
 
 h3 {
+
   font-weight: 600;
   margin-block-start: 1em;
   margin-block-end: 1em;
@@ -64,4 +66,14 @@ button:hover {
 a{
   color: white;
   text-decoration: none;
+}
+
+.card{
+  border-radius: 15px;
+  color: #333;
+  transition: 0.4s;
+}
+
+.card:hover{
+  box-shadow: 0 0 10px rgba(68, 68, 68, 0.462);
 }
