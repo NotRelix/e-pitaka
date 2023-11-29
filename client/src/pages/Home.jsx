@@ -21,7 +21,7 @@ function Home({username}) {
               <PageButton
                 toPage={"/e-pitaka/deposit"}
                 pageIcon={deposit}
-                pageName={"DEPOSIT"}
+                pageName={"DEPOSIT/WITHDRAW"}
               />
 
               <PageButton
