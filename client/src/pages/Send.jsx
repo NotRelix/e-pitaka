@@ -26,7 +26,7 @@ function Send() {
                 <label htmlFor="send-to" className="input-label">
                   SEND TO:
                 </label>
-                <input type="text" className="input-box" />
+                <input type="text" className="input-box" placeholder="Enter username here" />
               </div>
               <div className="send-input">
                 <label htmlFor="amount" className="input-label">
