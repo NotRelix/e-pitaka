@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Link, Routes, NavLink } from "react-router-dom";
 import userLogo from "../assets/user_profile_wh.png";
 import "../styles/Navbar.css";
 
-function Navbar({ isLoggedIn }) {
+function Navbar({ isLoggedIn, handleLogout }) {
   return (
     <>
       <div className="header">
@@ -20,7 +20,7 @@ function Navbar({ isLoggedIn }) {
             SETTINGS
           </NavLink>
           {isLoggedIn ? (
-            <NavLink className="link">
+            <NavLink onClick={handleLogout} className="link">
               <img src={userLogo} alt="User" className="user-profile-pic"/>
             </NavLink>
           ) : (
