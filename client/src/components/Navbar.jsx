@@ -16,6 +16,9 @@ function Navbar({ isLoggedIn }) {
           <NavLink className="link" to="e-pitaka/about-us">
             ABOUT US
           </NavLink>
+          <NavLink className="link" to="e-pitaka/settings">
+            SETTINGS
+          </NavLink>
           {isLoggedIn ? (
             <NavLink className="link">
               <img src={userLogo} alt="User" className="user-profile-pic"/>

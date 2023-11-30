@@ -12,6 +12,7 @@ import History from "./pages/History";
 import Savings from "./pages/Savings";
 import Confirmation from "./pages/Confirmation";
 import Receipt from "./pages/Receipt";
+import Settings from "./pages/Settings";
 import "./App.css";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path="e-pitaka/savings" element={<Savings />} />
             <Route path="e-pitaka/send/confirm" element={<Confirmation />} />
             <Route path="e-pitaka/send/receipt" element={<Receipt />} />
+            <Route path="e-pitaka/settings" element={<Settings />} />
           </Routes>
         </BrowserRouter>
       </div>
