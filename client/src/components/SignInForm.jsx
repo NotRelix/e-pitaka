@@ -25,6 +25,7 @@ function SignInForm({ handleLogin, setUsername }) {
           console.log("hi")
           setUsernameLocal(userInfo.username);
           setUserExists(true);
+          setUsername(userInfo.username)
         } else {
           console.log("bye")
           setUserExists(false);
@@ -42,7 +43,6 @@ function SignInForm({ handleLogin, setUsername }) {
       console.error("User Doesn't Exist");
       return;
     }
-    setUsername(username);
     handleLogin();
     navigate('/e-pitaka/home');
   }

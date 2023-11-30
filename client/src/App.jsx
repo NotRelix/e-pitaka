@@ -23,20 +23,27 @@ function App() {
   const handleLogin = () => {
     setIsLoggedIn(true);
     localStorage.setItem('isLoggedIn', 'true')
+    localStorage.setItem('username', username)
     console.log("User is Logged In");
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false)
     localStorage.setItem('isLoggedIn', 'false')
+    localStorage.setItem('username', '')
     console.log("User is Logged Out")
   }
 
   useEffect(() => {
     const storedLoginStatus = localStorage.getItem("isLoggedIn")
+    const storedUsername = localStorage.getItem("username")
+
     if (storedLoginStatus && storedLoginStatus === 'true') {
       setIsLoggedIn(true)
+      setUsername(storedUsername)
     }
+
+    console.log({storedLoginStatus, storedUsername, username})
   }, [])
 
   return (
