@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import view_hide from "../assets/View_hide.png";
+import React, { useState } from 'react'
+import view_hide from '../assets/View_hide.png'
+import view from '../assets/view.png'
 
 const CurrBalance = () => {
- const [isHidden, setIsHidden] = useState(false);
+ const [isHidden, setIsHidden] = useState(false)
+ const [imageSrc, setImageSrc] = useState(view)
 
  return (
    <>
@@ -12,8 +14,11 @@ const CurrBalance = () => {
            <h3>CURRENT BALANCE:</h3>
          </div>
          <div className="col-1">
-           <button className="hide-button" onClick={() => setIsHidden(!isHidden)}>
-             <img className="img_hide" src={view_hide} alt="View Hide" />
+           <button className="hide-button" onClick={() => {
+            setIsHidden(!isHidden)
+            setImageSrc(prevSrc => prevSrc == view ? view_hide : view)
+           }}>
+             <img className="img_hide" src={imageSrc} alt="View Hide" />
            </button>
          </div>
        </div>
@@ -24,7 +29,7 @@ const CurrBalance = () => {
        </div>
      </div>
    </>
- );
-};
+ )
+}
 
-export default CurrBalance;
+export default CurrBalance
