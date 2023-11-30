@@ -36,25 +36,14 @@ app.post('/sign-up', async (req, res) => {
     return ({ error: "User already Exists" })
   }
   conn.query(
-    "INSERT INTO `user` (`Fname`, `Lname`) VALUES (?, ?)",
-    [firstName, lastName],
+    "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
+    [username, password, firstName, lastName],
     (err, data) => {
       if (err) {
         console.error("Error inserting into 'user' table:", err)
         return;
       }
-
-      conn.query(
-        "INSERT INTO `account` (`Username`, `Password`) VALUES (?, ?)",
-        [username, password],
-        (err, data) => {
-          if (err) {
-            console.error("Error inserting into 'account' table:", err)
-            return;
-          }
-          console.log("Inserted Successfully")
-        }
-      )
+      console.log("Inserted Successfully")
     }
   )
   console.log(req.body);
