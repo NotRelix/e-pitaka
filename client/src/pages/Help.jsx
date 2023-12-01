@@ -11,11 +11,7 @@ function Help() {
         <div className="row help-head">
           <h3>DO YOU NEED HELP?</h3>
           <p>
-            Etiam justo sapien, placerat at condimentum at, auctor quis diam.
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-            per inceptos himenaeos. Phasellus nec pellentesque arcu. Praesent
-            eget ex venenatis, venenatis felis in, rutrum arcu. Vivamus rutrum
-            elit nec lacus ultricies placerat.
+            Send a message to the developers, whether it could be a simple message, or if you encounter a bug to inform the developers!
           </p>
         </div>
 
