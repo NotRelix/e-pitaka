@@ -1,0 +1,57 @@
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-container label {
+    margin-bottom: 5px;
+}
+
+.search-box {
+    width: 50%;
+    padding: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.amount-input {
+    border-radius: 5px;
+    text-align: center;
+}
+
+.card-body h3 {
+    margin: 10px 0;
+    font-weight: 600;
+    font-size: 27px;
+    color: #10b4b0;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    /* border-bottom: solid #10b4b0 1px;
+    padding-top: 5px; */
+}
+
+.admin-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-add, .admin-subtract {
+    background-color: rgb(71, 255, 156);
+    color: white;
+    margin: 20px 0px 30px;
+    padding: 10px;
+    width: fit-content;
+    font-weight: 600;
+    transition: 0.5s;
+}
