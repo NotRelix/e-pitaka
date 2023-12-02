@@ -16,18 +16,30 @@
     align-items: center;
     justify-content: center;
     height: 500px;
+    flex-wrap: wrap;
   }
   
   .setting-option {
     display: inline-block;
     text-align: center;
-    margin-right: 50px; 
+    margin-right: 20px;
+    margin-bottom: 20px;
   }
 
   .settings-body h4{
     margin: 20px 10px;
     font-weight: 800;
-    font-size: 32px;
+    font-size: 24px;
     letter-spacing: 4px;
     color: #10b4b0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .setting-option {
+      margin-right: 0;
+    }
+  
+    .settings-body h4 {
+      font-size: 18px;
+    }
   }
