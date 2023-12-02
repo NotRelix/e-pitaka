@@ -17,15 +17,11 @@ function SignIn({ handleLogin, setUsername }) {
         </div>
         <div className="col-lg-7 order-2 info-container">
           <div className="info-header">
-            THE BEST DIGITAL WALLET IN THE WORLD
+            A DIGITAL WALLET FOR THE SCHOOL
           </div>
           <p className="info-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+          
+Welcome to E-PITAKA, a cutting-edge digital wallet meticulously developed for seamless transactions within the confines of educational institutions. Tailored to cater to the diverse needs of students, teachers, school staff, and vendors. Experience the future of educational transactions with E-PITAKA - where innovation meets convenience.
           </p>
           <img
             src={down_arrow}

@@ -6,14 +6,7 @@ function AboutUs() {
     <>
       <h3 className="aboutus-title">ABOUT E-PITAKA</h3>
       <p className="aboutus-desc">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-        Duis sed gravida justo. Praesent metus erat, tempor non congue in, varius sit amet nibh. Vestibulum iaculis, dolor et pretium finibus, arcu augue auctor neque, vitae facilisis nulla sem nec mauris. Donec ullamcorper rutrum orci aliquam porta. Proin a turpis eleifend, tincidunt enim non, dapibus turpis. Duis quis aliquet nisi. Phasellus auctor tristique venenatis. Vivamus tincidunt dictum eleifend.
+      E-PITAKA, a cutting-edge digital wallet developed for seamless transactions within the confines of educational institutions. Tailored to cater to the diverse needs of students, teachers, school staff, and vendors, E-PITAKA stands as a unique and exclusive digital transaction system. E-PITAKA mirrors the convenience of mainstream digital wallets, empowering users to effortlessly navigate through a myriad of payments, ranging from meal purchases to tuition fees and extracurricular expenses. E-PITAKA transforms the traditional financial landscape within educational settings, providing a secure and efficient means of exchange.
       </p>
       <div className="aboutus-line" />
       <h3 className="aboutus-h3">THE DEVELOPERS</h3>
