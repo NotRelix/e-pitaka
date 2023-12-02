@@ -1,0 +1,26 @@
+.popup-modal {
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}  
+ 
+ .user-profile {
+    width: 100px;
+    height: 100px;
+}
+ 
+ .popup-close {
+    position: absolute;
+    top: 6%;
+    right: 4%;
+    cursor: pointer;
+}
+ 
+ .popup-section {
+    width: 80%;
+} 
