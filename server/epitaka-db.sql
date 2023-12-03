@@ -31,7 +31,7 @@ CREATE TABLE `account` (
   `Account_ID` int NOT NULL,
   `Username` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `Balance` decimal(10,0) NOT NULL DEFAULT '0',
+  `Balance` decimal(10,2) NOT NULL DEFAULT '0',
   `Email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `FName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `LName` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`Account_ID`, `Username`, `Password`, `Balance`, `Email`, `FName`, `LName`, `Valid_ID`, `Profile_pic`, `User_type`) VALUES
 (1, 'admin', 'admin', 0, NULL, 'admin', 'admin', NULL, NULL, 'admin'),
-(2, 'Loading', 'asdasd', 0, NULL, 'Reece', 'Lim', NULL, NULL, 'regular'),
+(2, 'Loading', 'asdasd', 42, NULL, 'Reece', 'Lim', NULL, NULL, 'regular'),
 (3, 'asd', 'asd', 0, NULL, 'asd', 'asd', NULL, NULL, 'regular'),
 (4, 'asda', 'asda', 0, NULL, 'asd', 'asd', NULL, NULL, 'regular');
 
