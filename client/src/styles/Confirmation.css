@@ -28,8 +28,19 @@
   
   .amount-section {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
+  }
+
+  .confirm-leftside {
+    flex: 1;
+    text-align: left;
+  }
+
+  .confirm-rightside {
+    flex: 1;
+    text-align: right;
+    padding-right: 5px;
   }
   
   h3, h5 {
