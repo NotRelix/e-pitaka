@@ -16,9 +16,6 @@ function Navbar({ isLoggedIn, handleLogout }) {
           <NavLink className="link" to="e-pitaka/about-us">
             ABOUT US
           </NavLink>
-          <NavLink className="link" to="e-pitaka/settings">
-            SETTINGS
-          </NavLink>
           {isLoggedIn ? (
             <div className="menu-container">
               <DropdownProfile handleLogout={handleLogout} />

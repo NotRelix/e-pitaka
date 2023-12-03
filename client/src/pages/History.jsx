@@ -8,6 +8,7 @@ import { useState } from "react";
 function History() {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
+  const [popUpInfo, setPopUpInfo] = useState({});
 
   const handleCloseClick = () => {
     navigate("/e-pitaka/home");
@@ -17,7 +18,8 @@ function History() {
     setShowPopup(false);
   }
 
-  const handleListItemClick = () => {
+  const handleListItemClick = (transaction) => {
+    setPopUpInfo(transaction);
     setShowPopup(!showPopup);
   }
 
@@ -25,7 +27,7 @@ function History() {
     <>
     {showPopup && (
       <div className="popup-container">
-        <HistoryPopup onClose={handleClosePopup} />
+        <HistoryPopup onClose={handleClosePopup} popUpInfo={popUpInfo} />
       </div>
     )}
       <div className="card history-container">
@@ -43,7 +45,7 @@ function History() {
               <li
                 className="list-group-item transaction-container"
                 key={transaction.id}
-                onClick={handleListItemClick}
+                onClick={() => handleListItemClick(transaction)}
               >
                 {transaction.type ? (
                   <div className="d-flex w-100 justify-content-between">

@@ -24,9 +24,9 @@ function DropdownProfile({ handleLogout }) {
                 open && (
                     <div ref={menuRef} className="card dropdown shadow-lg">
                         <ul>
-                            <li onClick={() => setOpen(false)} className="profile-link">ACCOUNT SETTINGS</li>
+                            <NavLink to="e-pitaka/settings" onClick={() => setOpen(false)} className="profile-link">ACCOUNT SETTINGS</NavLink>
                             <hr />
-                            <li onClick={() => setOpen(false)} className="profile-link">DOCUMENTS</li>
+                            <NavLink to="e-pitaka/" onClick={() => setOpen(false)} className="profile-link">DOCUMENTS</NavLink>
                             <button onClick={handleLogout} className="log-out">Log Out</button>
                         </ul>
                     </div>
