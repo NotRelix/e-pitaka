@@ -28,6 +28,7 @@ function Receipt() {
             <h4>FULL NAME</h4>
             <h5>username</h5>
             </div>
+            <hr className="line-below-amount"/>
             <div className="amount-section">
               <div className="confirm-leftside">
               <h3>AMOUNT</h3>
