@@ -23,15 +23,20 @@ function Receipt() {
         </div>
         <div className="card-body receipt-body">
         <div className="user-details">
-            <img src={check} className="check-mark"/>
+            <img src={check} className="check-mark" />
             <img src={userprofile} className="user-profile" />
             <h4>FULL NAME</h4>
             <h5>username</h5>
             </div>
             <div className="amount-section">
-            <h3>AMOUNT</h3>
-            <hr className="line-below-amount" />
-            <h3>TOTAL AMOUNT SENT:</h3>
+              <div className="confirm-leftside">
+              <h3>AMOUNT</h3>
+              <h3>TOTAL AMOUNT SENT:</h3>
+              </div>
+              <div className="confirm-rightside">
+              <h3>money</h3>
+              <h3>cash</h3>
+              </div>
             </div>
         </div>
       </div>
