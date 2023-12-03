@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/SignUp.css';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ function SignUpForm({ handleLogin, setUsername }) {
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
   const [userExists, setUserExists] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigate = useNavigate();
 
@@ -38,6 +39,11 @@ function SignUpForm({ handleLogin, setUsername }) {
 
     if (userExists) {
       console.error("Username already exists. Please choose a different one.");
+      return;
+    }
+
+    if(password != confirmPassword) {
+      console.error("Passwords do not match.");
       return;
     }
 
@@ -73,6 +79,7 @@ function SignUpForm({ handleLogin, setUsername }) {
         <form onSubmit={handleSubmit}>
           <h3>CREATE ACCOUNT</h3>
           {userExists && <p className='text-danger'>Username Already Exists</p>}
+          {password != confirmPassword && confirmPassword && <p className='text-danger'>Passwords Do Not Match</p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>
@@ -111,7 +118,7 @@ function SignUpForm({ handleLogin, setUsername }) {
               />
             </div>
           </div>
-          <div className=" row input-area">
+          <div className="row input-area">
             <div className="col">
               <label>Your Password</label>
               <input
@@ -120,6 +127,19 @@ function SignUpForm({ handleLogin, setUsername }) {
                 }}
                 type="password"
                 className="form-control"
+                required
+              />
+            </div>
+          </div>
+          <div className='row input-area'>
+            <div className='col'>
+              <label>Confirm Password</label>
+              <input
+                onChange={(e) => {
+                  handleChange(e, setConfirmPassword)
+                }}
+                type='password'
+                className='form-control'
                 required
               />
             </div>
@@ -139,6 +159,9 @@ function SignUpForm({ handleLogin, setUsername }) {
             </button>
           </div>
         </form>
+        <p className='sign-in-link'>
+          Already have an account? <Link to='/e-pitaka/' className='login-link'>Sign In</Link>
+        </p>
       </div>
     </>
   );

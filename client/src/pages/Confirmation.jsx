@@ -42,6 +42,7 @@ function Send() {
             <h3>amount</h3>
             </div>
             </div>
+            <hr className="line-below-amount" />
             <p>Confirmed transactions will not be refunded. Please make sure that the details above are correct.</p>
             <div className="button-container">
               <button type="submit" className="next-button" onClick={() => navigate('/e-pitaka/send/receipt')}>
