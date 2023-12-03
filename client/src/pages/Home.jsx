@@ -13,7 +13,7 @@ function Home({username}) {
     <>
       <div className="home-container">
         <h1 className="text-center">Hi, {username}!</h1>
-        <CurrBalance />
+        <CurrBalance username = {username} />
 
         <div>
           <footer className="card page-button-container">
