@@ -69,6 +69,20 @@ app.get('/check-username/:username', (req, res) => {
   )
 })
 
+app.get('/user-balance/:username', (req, res) => {
+  const username = req.params.username;
+  conn.query(
+    "SELECT `Balance` FROM `account` WHERE `Username` = ?", [username], (err, data) => {
+      if (err) {
+        console.error("Failed to retrieve User Balance:", err);
+        return res.status(500).json({ error: "Failed to retrieve User Balance." });
+      }
+      const userBalance = data.length > 0 ? data[0].Balance : null;
+      res.json({ userBalance })
+    }
+  )
+})
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
