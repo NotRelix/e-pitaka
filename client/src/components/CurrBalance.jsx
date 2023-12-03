@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import view_hide from '../assets/View_hide.png'
 import view from '../assets/view.png'
+import axios from 'axios'
 
-const CurrBalance = () => {
+const CurrBalance = ({ username }) => {
  const [isHidden, setIsHidden] = useState(false)
  const [imageSrc, setImageSrc] = useState(view)
+ const [balance, setBalance] = useState(null)
+
+ useEffect(() => {
+  fetchUserBalance()
+ }, [username])
+
+ const fetchUserBalance = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/user-balance/${username}`)
+    const amount = parseFloat(response.data.userBalance).toFixed(2)
+    setBalance(amount)
+  } catch (error) {
+    console.error("Error fetching User Balance:", error)
+    setBalance(null)
+  }
+ }
 
  return (
    <>
@@ -24,7 +41,7 @@ const CurrBalance = () => {
        </div>
        <div className="row">
          <p className="balance-value">
-           {isHidden ? '₱ 1,000,000.00' : '₱ ..........'}
+           {isHidden ? `₱ ${balance}` : '₱ ..........'}
          </p>
        </div>
      </div>
