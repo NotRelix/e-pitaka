@@ -1,12 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {useState} from 'react';
 import "../styles/Settings.css";
 import closeButton from "../assets/close_ring_light.png";
+import ChangePass from "../Popup/ChangePass";
+import AccountRecovery from "../Popup/AccountRecovery";
+
 import password from "../assets/Key_alt.png"
 import recovery from "../assets/User_fill.png"
 import notification from "../assets/Bell_pin.png"
 
 function Settings() {
+  const [CPbutton, setCPbutton] = useState(false);
+  const [ARbutton, setARbutton] = useState(false);
   const navigate = useNavigate();
 
   const handleCloseClick = () => {
@@ -26,11 +32,11 @@ function Settings() {
           />
         </div>
         <div className="settings-body">
-          <Link onClick="" className="setting-option">
+          <Link onClick={()=> setCPbutton(true)} className="setting-option">
             <img src={password} alt="Change Password" />
             <h4>CHANGE PASSWORD</h4>
           </Link>
-          <Link onClick="" className="setting-option">
+          <Link onClick={()=> setARbutton(true)} className="setting-option">
             <img src={recovery} alt="Account Recovery" />
             <h4>SET <br/> ACCOUNT RECOVERY</h4>
           </Link>
@@ -38,6 +44,9 @@ function Settings() {
             <img src={notification} alt="Notification Settings" />
             <h4>NOTIFICATION <br/> SETTINGS</h4>
           </Link>
+
+          <ChangePass trigger={CPbutton} setTrigger={setCPbutton}/>
+          <AccountRecovery trigger={ARbutton} setTrigger={setARbutton}/>
         </div>
       </div>
     </>
