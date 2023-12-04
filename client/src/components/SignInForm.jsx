@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function SignInForm({ handleLogin, setUsername }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
-  const [userExists, setUserExists] = useState(false)
+  const [userExists, setUserExists] = useState(false);
 
   const handleChange = (e, SetFn) => {
     SetFn(e.target.value);
@@ -19,23 +19,28 @@ function SignInForm({ handleLogin, setUsername }) {
           return;
         }
 
-        const response = await axios.get(`http://127.0.0.1:3000/check-username/${username}`)
-        const userInfo = response.data.userInfo;
-        if (userInfo && password === userInfo.password) {
-          console.log("hi")
+        const response = await axios.post(`http://127.0.0.1:3000/check-username/${username}`, {
+          password: password,
+        });
+
+        const { usernameExists, userInfo } = response.data;
+
+        if (usernameExists && userInfo) {
+          console.log("hi");
           setUsernameLocal(userInfo.username);
           setUserExists(true);
-          setUsername(userInfo.username)
+          setUsername(userInfo.username);
         } else {
-          console.log("bye")
+          console.log("bye");
           setUserExists(false);
         }
       } catch (error) {
         console.error("Error Checking Login:", error);
       }
-    }
-    checkLogin()
-  }, [username, password])
+    };
+
+    checkLogin();
+  }, [username, password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,17 +50,13 @@ function SignInForm({ handleLogin, setUsername }) {
     }
     handleLogin();
     navigate('/e-pitaka/home');
-  }
+  };
 
   return (
     <>
       <div className="card mb-3 text-center form-container sign-in-form">
         <form onSubmit={handleSubmit}>
           <h3>SIGN IN</h3>
-          {/* <div className="input-area">
-            <label>Your Institution</label>
-            <input type="text" className="form-control" />
-          </div> */}
           <div className="input-area">
             <label>Your Username</label>
             <input
@@ -63,7 +64,8 @@ function SignInForm({ handleLogin, setUsername }) {
                 handleChange(e, setUsernameLocal);
               }}
               type="text"
-              className="form-control" />
+              className="form-control"
+            />
           </div>
           <div className="input-area">
             <label>Your Password</label>
@@ -72,7 +74,8 @@ function SignInForm({ handleLogin, setUsername }) {
                 handleChange(e, setPassword);
               }}
               type="password"
-              className="form-control" />
+              className="form-control"
+            />
           </div>
           <button type="submit" className="sign-in-button">
             SIGN IN

@@ -2,8 +2,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 const sql = require('mysql2')
+const bcrypt = require('bcrypt')
 app.use(express.json())
 app.use(require('cors')())
+
+const saltRounds = 10
 
 const conn = sql.createConnection({
   host: 'localhost',
@@ -32,12 +35,13 @@ app.post('/sign-up', async (req, res) => {
   const username = req.body.username
   const password = req.body.password
   const userExists = await checkUsername(username)
+  const hashedPassword = await bcrypt.hash(password, saltRounds)
   if (userExists) {
     return ({ error: "User already Exists" })
   }
   conn.query(
     "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
-    [username, password, firstName, lastName],
+    [username, hashedPassword, firstName, lastName],
     (err, data) => {
       if (err) {
         console.error("Error inserting into 'user' table:", err)
@@ -68,6 +72,40 @@ app.get('/check-username/:username', (req, res) => {
     }
   )
 })
+
+app.post('/check-username/:username', async (req, res) => {
+  const username = req.params.username;
+  const passwordInput = req.body.password;
+
+  conn.query(
+    "SELECT * FROM `account` WHERE `Username` = ?", [username], async (err, data) => {
+      if (err) {
+        console.error("Failed to Check for Username:", err);
+        return res.status(500).json({ error: "Failed to check for username." });
+      }
+
+      if (data.length > 0) {
+        const storedHashedPassword = data[0].Password;
+        const passwordMatch = await bcrypt.compare(passwordInput, storedHashedPassword);
+        const usernameExists = true;
+        const userInfo = usernameExists
+          ? { username: data[0].Username, password: data[0].Password }
+          : null;
+
+        if (passwordMatch) {
+          console.log("Password is correct");
+          res.json({ usernameExists, userInfo });
+        } else {
+          console.log("Incorrect password");
+          res.json({ usernameExists: false, userInfo: null });
+        }
+      } else {
+        console.log("User not found");
+        res.json({ usernameExists: false, userInfo: null });
+      }
+    }
+  );
+});
 
 app.get('/user-balance/:username', (req, res) => {
   const username = req.params.username;
