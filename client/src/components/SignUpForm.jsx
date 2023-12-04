@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/SignUp.css';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ function SignUpForm({ handleLogin, setUsername }) {
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
   const [userExists, setUserExists] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigate = useNavigate();
 
@@ -16,7 +17,12 @@ function SignUpForm({ handleLogin, setUsername }) {
     const checkUsername = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:3000/check-username/${username}`);
-        setUserExists(response.data.usernameExists);
+        const usernameExists = response.data.usernameExists;
+        setUserExists(usernameExists);
+        if (!usernameExists) {
+          console.log(username)
+          setUsername(username)
+        }
       } catch (error) {
         console.error("Error checking username:", error);
       }
@@ -36,19 +42,26 @@ function SignUpForm({ handleLogin, setUsername }) {
       return;
     }
 
+    if(password != confirmPassword) {
+      console.error("Passwords do not match.");
+      return;
+    }
+
     const inputData = { fname, lname, username, password };
 
     console.log('Submitting Sign Up Form details...');
     console.table(inputData);
+
     try {
       const { data } = await axios.post(
         'http://127.0.0.1:3000/sign-up',
         inputData
       );
-      setUsername(username)
+      // setUsername(username)
+      handleLogin();
       console.log('Server responded with:', data);
       navigate('/e-pitaka/home');
-      handleLogin();
+
     } catch (e) {
       // Catch errors from the backend here
       window.alert(e.message);
@@ -65,7 +78,8 @@ function SignUpForm({ handleLogin, setUsername }) {
       <div className="card text-center form-container sign-up-form">
         <form onSubmit={handleSubmit}>
           <h3>CREATE ACCOUNT</h3>
-          {userExists ? <p className='text-danger'>Username Already Exists</p> : <p></p>}
+          {userExists && <p className='text-danger'>Username Already Exists</p>}
+          {password != confirmPassword && confirmPassword && <p className='text-danger'>Passwords Do Not Match</p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>
@@ -104,7 +118,7 @@ function SignUpForm({ handleLogin, setUsername }) {
               />
             </div>
           </div>
-          <div className=" row input-area">
+          <div className="row input-area">
             <div className="col">
               <label>Your Password</label>
               <input
@@ -117,10 +131,26 @@ function SignUpForm({ handleLogin, setUsername }) {
               />
             </div>
           </div>
+          <div className='row input-area'>
+            <div className='col'>
+              <label>Confirm Password</label>
+              <input
+                onChange={(e) => {
+                  handleChange(e, setConfirmPassword)
+                }}
+                type='password'
+                className='form-control'
+                required
+              />
+            </div>
+          </div>
           <div className="row input-area">
             <div className="col">
               <label>Valid ID</label>
-              <input type="file" className="form-control" />
+              <input
+                type="file"
+                className="form-control"
+              />
             </div>
           </div>
           <div className="row justify-content-center">
@@ -129,6 +159,9 @@ function SignUpForm({ handleLogin, setUsername }) {
             </button>
           </div>
         </form>
+        <p className='sign-in-link'>
+          Already have an account? <Link to='/e-pitaka/' className='login-link'>Sign In</Link>
+        </p>
       </div>
     </>
   );

@@ -1,8 +1,27 @@
-import React, { useState } from 'react';
-import view_hide from "../assets/View_hide.png";
+import React, { useState, useEffect } from 'react'
+import view_hide from '../assets/View_hide.png'
+import view from '../assets/view.png'
+import axios from 'axios'
 
-const CurrBalance = () => {
- const [isHidden, setIsHidden] = useState(false);
+const CurrBalance = ({ username }) => {
+ const [isHidden, setIsHidden] = useState(false)
+ const [imageSrc, setImageSrc] = useState(view)
+ const [balance, setBalance] = useState(null)
+
+ useEffect(() => {
+  fetchUserBalance()
+ }, [username])
+
+ const fetchUserBalance = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/user-balance/${username}`)
+    const amount = parseFloat(response.data.userBalance).toFixed(2)
+    setBalance(amount)
+  } catch (error) {
+    console.error("Error fetching User Balance:", error)
+    setBalance(null)
+  }
+ }
 
  return (
    <>
@@ -12,19 +31,22 @@ const CurrBalance = () => {
            <h3>CURRENT BALANCE:</h3>
          </div>
          <div className="col-1">
-           <button className="hide-button" onClick={() => setIsHidden(!isHidden)}>
-             <img className="img_hide" src={view_hide} alt="View Hide" />
+           <button className="hide-button" onClick={() => {
+            setIsHidden(!isHidden)
+            setImageSrc(prevSrc => prevSrc == view ? view_hide : view)
+           }}>
+             <img className="img_hide" src={imageSrc} alt="View Hide" />
            </button>
          </div>
        </div>
        <div className="row">
          <p className="balance-value">
-           {isHidden ? '₱ 1,000,000.00' : '₱ ..........'}
+           {isHidden ? `₱ ${balance}` : '₱ ..........'}
          </p>
        </div>
      </div>
    </>
- );
-};
+ )
+}
 
-export default CurrBalance;
+export default CurrBalance

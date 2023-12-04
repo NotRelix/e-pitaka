@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Link, Routes, NavLink } from "react-router-dom";
-import userLogo from "../assets/user_profile_wh.png";
 import "../styles/Navbar.css";
+import DropdownProfile from "./DropdownProfile";
 
-function Navbar({ isLoggedIn }) {
+function Navbar({ isLoggedIn, handleLogout }) {
   return (
     <>
       <div className="header">
@@ -16,13 +16,10 @@ function Navbar({ isLoggedIn }) {
           <NavLink className="link" to="e-pitaka/about-us">
             ABOUT US
           </NavLink>
-          <NavLink className="link" to="e-pitaka/settings">
-            SETTINGS
-          </NavLink>
           {isLoggedIn ? (
-            <NavLink className="link">
-              <img src={userLogo} alt="User" className="user-profile-pic"/>
-            </NavLink>
+            <div className="menu-container">
+              <DropdownProfile handleLogout={handleLogout} />
+            </div>
           ) : (
             <NavLink className="link" to="e-pitaka/sign-up">
               SIGN UP

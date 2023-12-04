@@ -6,6 +6,10 @@ import closeButton from "../assets/close_ring_light.png";
 import ChangePass from "../Popup/ChangePass";
 import AccountRecovery from "../Popup/AccountRecovery";
 
+import password from "../assets/Key_alt.png"
+import recovery from "../assets/User_fill.png"
+import notification from "../assets/Bell_pin.png"
+
 function Settings() {
   const [CPbutton, setCPbutton] = useState(false);
   const [ARbutton, setARbutton] = useState(false);
@@ -29,15 +33,15 @@ function Settings() {
         </div>
         <div className="settings-body">
           <Link onClick={()=> setCPbutton(true)} className="setting-option">
-            <img src="../src/assets/Key_alt.png" alt="Change Password" />
+            <img src={password} alt="Change Password" />
             <h4>CHANGE PASSWORD</h4>
           </Link>
           <Link onClick={()=> setARbutton(true)} className="setting-option">
-            <img src="../src/assets/User_fill.png" alt="Account Recovery" />
+            <img src={recovery} alt="Account Recovery" />
             <h4>SET <br/> ACCOUNT RECOVERY</h4>
           </Link>
           <Link onClick="" className="setting-option">
-            <img src="../src/assets/Bell_pin.png" alt="Notification Settings" />
+            <img src={notification} alt="Notification Settings" />
             <h4>NOTIFICATION <br/> SETTINGS</h4>
           </Link>
 

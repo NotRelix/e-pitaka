@@ -30,22 +30,27 @@ function Send() {
             <img src={userprofile} className="user-profile" />
             <h4>FULL NAME</h4>
             <h5>username</h5>
+            <h5>You're about to send</h5>
             </div>
           <div className="amount-section">
-            <h3>E-PITAKA MONEY:</h3>
-            <h5>You're about to send</h5>
+            <div className="confirm-leftside">
             <h3>AMOUNT</h3>
-            <hr className="line-below-amount" />
             <h3>TOTAL AMOUNT TO PAY:</h3>
+            </div>
+            <div className="confirm-rightside">
+            <h3>cash</h3>
+            <h3>amount</h3>
+            </div>
+            </div>
+            <hr className="line-below-amount" />
             <p>Confirmed transactions will not be refunded. Please make sure that the details above are correct.</p>
-          </div>
-          <div className="button-container">
+            <div className="button-container">
               <button type="submit" className="next-button" onClick={() => navigate('/e-pitaka/send/receipt')}>
                 SEND
               </button>
+          </div>
             </div>
         </div>
-      </div>
     </>
   );
 }

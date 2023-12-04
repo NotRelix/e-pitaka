@@ -29,3 +29,7 @@
   opacity: 80%;
 }
 
+.login-link {
+  color: rgb(71, 255, 156);
+  text-decoration: underline;
+}
