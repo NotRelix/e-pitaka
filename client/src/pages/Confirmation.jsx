@@ -1,15 +1,22 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import closeButton from "../assets/close_ring_light.png";
 import userprofile from "../assets/user_profile.png";
 import "../styles/Confirmation.css";
 
 function Send() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const userInfo = location.state;
 
   const handleCloseClick = () => {
     navigate("/e-pitaka/send");
   };
+
+  useEffect(() => {
+    console.log(userInfo) 
+  }, [])
 
   return (
     <>

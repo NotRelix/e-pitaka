@@ -60,7 +60,14 @@ app.get('/check-username/:username', (req, res) => {
       }
       const usernameExists = data.length > 0;
       const userInfo = usernameExists
-        ? { username: data[0].Username, password: data[0].Password }
+        ? {
+          id: data[0].Account_ID,
+          username: data[0].Username,
+          password: data[0].Password,
+          balance: data[0].Balance,
+          firstName: data[0].FName,
+          lastName: data[0].LName
+        }
         : null;
       
       console.log(userInfo)
