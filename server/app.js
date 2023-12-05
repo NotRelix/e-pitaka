@@ -5,6 +5,7 @@ const sql = require('mysql2')
 const bcrypt = require('bcrypt')
 app.use(express.json())
 app.use(require('cors')())
+const { findUserById, updateUserBalance, saveTransaction } = require('./mysqlUtility');
 
 const saltRounds = 10
 
@@ -126,6 +127,33 @@ app.get('/user-balance/:username', (req, res) => {
       res.json({ userBalance })
     }
   )
+})
+
+app.post("/api/transfer", async (req, res) => {
+  const { senderID, receiverID, amount } = req.body;
+  
+  try {
+    const sender = await findUserById(senderID);
+    const receiver = await findUserById(receiverID);
+
+    if (!sender || !receiver) {
+      return res.status(400).json({error: "Invalid sender or receiver ID"})
+    }
+
+    if (sender.Balance < amount) {
+      return res.status(400).json({error: "Insufficient Balance"})
+    }
+
+    await updateUserBalance(senderID, parseFloat(sender.balance) - parseFloat(amount));
+    await updateUserBalance(receiverID, parseFloat(receiver.balance) + parseFloat(amount));
+
+    await saveTransaction(senderID, receiverID, amount);
+
+    return res.status(200).json({ success: true })
+  } catch (err) {
+    console.error("Error Processing Money Transaction:", err);
+    res.send({ error: "Internal Server Error" })
+  }
 })
 
 app.get('/', (req, res) => {

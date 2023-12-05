@@ -36,11 +36,15 @@ function Send() {
         return;
       }
 
+      // Note: find a way to obtain sender and receiver ids
       const userInfo = {
-        sendFrom: sendFrom,
-        sendTo: response.data.userInfo.username,
-        amountSent: amount,
-
+        receiverID: response.data.userInfo.id,
+        sender: sendFrom,
+        receiver: response.data.userInfo.username,
+        amountSent: parseFloat(amount).toFixed(2),
+        firstName: response.data.userInfo.firstName,
+        lastName: response.data.userInfo.lastName,
+        balance: response.data.userInfo.balance,
       }
       // Im pretty much done here (I think) gotta eet dinner brb
       navigate("/e-pitaka/send/confirm", { state: userInfo })
@@ -79,6 +83,7 @@ function Send() {
                   type="text"
                   className="input-box"
                   placeholder="Enter username here"
+                  required
                 />
               </div>
               <div className="send-input">
@@ -89,7 +94,9 @@ function Send() {
                   onChange={(e) => handleChange(e, setAmount)}
                   type="number"
                   step="any"
-                  className="input-box" />
+                  className="input-box"
+                  required
+                />
               </div>
               <div className="send-input">
                 <label htmlFor="message" className="input-label">
