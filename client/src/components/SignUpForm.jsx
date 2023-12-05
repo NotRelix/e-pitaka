@@ -57,6 +57,9 @@ function SignUpForm({ handleLogin, setUsername }) {
         'http://127.0.0.1:3000/sign-up',
         inputData
       );
+
+      // const token = data.token
+      // localStorage.setItem('token', token)
       setUsername(username)
       handleLogin();
       console.log('Server responded with:', data);
