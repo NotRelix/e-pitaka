@@ -14,7 +14,12 @@ const CurrBalance = ({ username }) => {
 
  const fetchUserBalance = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/user-balance/${username}`)
+    const token = localStorage.getItem('token')
+    const response = await axios.get(`http://localhost:3000/user-balance/${username}`, {
+      headers: {
+        Authorization: `Bearer: ${token}`
+      }
+    })
     const amount = parseFloat(response.data.userBalance).toFixed(2)
     setBalance(amount)
   } catch (error) {

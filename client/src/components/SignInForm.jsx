@@ -12,6 +12,10 @@ function SignInForm({ handleLogin, setUsername }) {
     SetFn(e.target.value);
   };
 
+  const handleToken = (token) => {
+    localStorage.setItem('token', token)
+  }
+
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -23,13 +27,14 @@ function SignInForm({ handleLogin, setUsername }) {
           password: password,
         });
 
-        const { usernameExists, userInfo } = response.data;
+        const { usernameExists, userInfo, token } = response.data;
 
-        if (usernameExists && userInfo) {
+        if (usernameExists && userInfo && token) {
           console.log("hi");
           setUsernameLocal(userInfo.username);
           setUserExists(true);
           setUsername(userInfo.username);
+          handleToken(token)
         } else {
           console.log("bye");
           setUserExists(false);
