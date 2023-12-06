@@ -61,7 +61,7 @@ app.post('/sign-up', async (req, res) => {
   const userExists = await checkUsername(username)
   const hashedPassword = await bcrypt.hash(password, saltRounds)
   if (userExists) {
-    return ({ error: "User already Exists" })
+    return res.json({ error: "User already Exists" })
   }
   conn.query(
     "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
@@ -78,7 +78,6 @@ app.post('/sign-up', async (req, res) => {
     }
   )
   console.log(req.body);
-  res.json(req.body);
 });
 
 app.get('/check-username/:username', (req, res) => {
