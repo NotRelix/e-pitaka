@@ -28,6 +28,7 @@ function DropdownProfile({ handleLogout }) {
                 console.log('Logout Successfully')
                 localStorage.removeItem('token')
                 handleLogout()
+                console.log(`Token after logout: ${localStorage.getItem('token')}`)
             } else {
                 console.error(response.data.message || 'Logout failed')
             }
