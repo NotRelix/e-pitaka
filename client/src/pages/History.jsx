@@ -1,14 +1,33 @@
-import "../styles/History.css";
-import closeButton from "../assets/close_ring_light.png";
-import { historyData } from "../test/historyData.js";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import closeButton from "../assets/close_ring_light.png";
+import TransactionList from "../components/TransactionsList.jsx";
 import HistoryPopup from "../components/HistoryPopup.jsx";
-import { useState } from "react";
+import "../styles/History.css";
+import axios from "axios";
 
-function History() {
+function History({ username }) {
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [popUpInfo, setPopUpInfo] = useState({});
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, [username]);
+
+  const fetchTransactions = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/user-transactions/${username}`
+      );
+
+      const list = response.data;
+      setTransactions(list);
+    } catch (err) {
+      window.alert(e.message);
+    }
+  };
 
   const handleCloseClick = () => {
     navigate("/e-pitaka/home");
@@ -16,20 +35,21 @@ function History() {
 
   const handleClosePopup = () => {
     setShowPopup(false);
-  }
+  };
 
   const handleListItemClick = (transaction) => {
     setPopUpInfo(transaction);
     setShowPopup(!showPopup);
-  }
+  };
 
   return (
     <>
-    {showPopup && (
-      <div className="popup-container">
-        <HistoryPopup onClose={handleClosePopup} popUpInfo={popUpInfo} />
-      </div>
-    )}
+      {showPopup && (
+        <div className="popup-container">
+          <HistoryPopup onClose={handleClosePopup} popUpInfo={popUpInfo} />
+        </div>
+      )}
+
       <div className="card history-container">
         <div className="card-header line-color">
           <h3>HISTORY</h3>
@@ -40,42 +60,7 @@ function History() {
           />
         </div>
         <div className="card-body">
-          <ul className="list-group list-group-flush transaction-list">
-            {historyData.map((transaction) => (
-              <li
-                className="list-group-item transaction-container"
-                key={transaction.id}
-                onClick={() => handleListItemClick(transaction)}
-              >
-                {transaction.type ? (
-                  <div className="d-flex w-100 justify-content-between">
-                    <h5 className="mb-1 transaction-value add">
-                      +{" "}
-                      {transaction.value.toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "PHP",
-                      })}
-                    </h5>
-                    <small>From: Username</small>
-                  </div>
-                ) : (
-                  <div className="d-flex w-100 justify-content-between">
-                    <h5 className="mb-1 transaction-value sub">
-                      -{" "}
-                      {transaction.value.toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "PHP",
-                      })}
-                    </h5>
-                    <small>To: Username</small>
-                  </div>
-                )}
-                <small>
-                  {transaction.date} {transaction.time}
-                </small>
-              </li>
-            ))}
-          </ul>
+          <TransactionList username={username} transactions={transactions} handleListItemClick={handleListItemClick}/>
         </div>
       </div>
     </>
