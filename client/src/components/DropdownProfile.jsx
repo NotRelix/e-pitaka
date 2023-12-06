@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { NavLink } from "react-router-dom"
 import "../styles/Navbar.css";
 import userLogo from "../assets/user_profile_wh.png";
+import axios from "axios";
 
 function DropdownProfile({ handleLogout }) {
     const [open, setOpen] = useState(false)
@@ -13,6 +14,28 @@ function DropdownProfile({ handleLogout }) {
             setOpen(false);
         }
     });
+    
+    const handleLogoutClick = async () => {
+        try {
+            const response = await axios.post('http://127.0.0.1:3000/logout',
+                null, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    }
+                }
+            )
+            if(response.status == 200) {
+                console.log('Logout Successfully')
+                localStorage.removeItem('token')
+                handleLogout()
+            } else {
+                console.error(response.data.message || 'Logout failed')
+            }
+        } catch (error) {
+            console.error('Error during Logout:', error)
+        }
+    }
+    
     return (
         <>
             <img
@@ -27,7 +50,7 @@ function DropdownProfile({ handleLogout }) {
                             <NavLink to="e-pitaka/settings" onClick={() => setOpen(false)} className="profile-link">ACCOUNT SETTINGS</NavLink>
                             <hr />
                             <NavLink to="e-pitaka/" onClick={() => setOpen(false)} className="profile-link">DOCUMENTS</NavLink>
-                            <button onClick={handleLogout} className="log-out">Log Out</button>
+                            <button onClick={handleLogoutClick} className="log-out">Log Out</button>
                         </ul>
                     </div>
                 )
