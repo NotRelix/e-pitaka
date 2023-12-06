@@ -20,7 +20,7 @@ function AccountRecovery(props){
                     </div>
                     <div className="accountR-form">
                         <center>
-                            <h3>SET ACCOUNT RECOVERY</h3>
+                            <h3>SET ACCOUNT <br/>RECOVERY</h3>
                         </center>
                         <form>
                             <label for="RecEmail">Recovery Email</label><br/>

@@ -69,7 +69,7 @@ app.post("/sign-up", async (req, res) => {
   const userExists = await checkUsername(username);
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   if (userExists) {
-    return { error: "User already Exists" };
+    return res.json({ error: "User already Exists" })
   }
   conn.query(
     "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
@@ -88,7 +88,6 @@ app.post("/sign-up", async (req, res) => {
     }
   );
   console.log(req.body);
-  res.json(req.body);
 });
 
 app.get("/check-username/:username", (req, res) => {
@@ -151,31 +150,19 @@ app.post("/check-username/:username", async (req, res) => {
           res.json({ usernameExists, userInfo, token }); //another parameter here ,token
         } else {
           console.log("Incorrect password");
-          res
-            .status(401)
-            .json({
-              usernameExists: false,
-              userInfo: null,
-              error: "Incorrect password",
-            });
+          res.json({ usernameExists: false, userInfo: null, error: 'Incorrect password' });
         }
       } else {
         console.log("User not found");
-        res
-          .status(404)
-          .json({
-            usernameExists: false,
-            userInfo: null,
-            error: "User not found",
-          });
+        res.json({ usernameExists: false, userInfo: null, error: 'User not found' });
       }
     }
   );
 });
 
-// app.post('/logout', (req, res) => {
-
-// })
+app.post('/logout', verifyToken, (req, res) => {
+  res.json({ success: true, message: "Logout is Successful" })
+})
 
 app.get("/user-balance/:username", verifyToken, (req, res) => {
   const username = req.params.username;
