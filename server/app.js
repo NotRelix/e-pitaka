@@ -133,11 +133,11 @@ app.post('/check-username/:username', async (req, res) => {
           res.json({ usernameExists, userInfo, token }); //another parameter here ,token
         } else {
           console.log("Incorrect password");
-          res.status(401).json({ usernameExists: false, userInfo: null, error: 'Incorrect password' });
+          res.json({ usernameExists: false, userInfo: null, error: 'Incorrect password' });
         }
       } else {
         console.log("User not found");
-        res.status(404).json({ usernameExists: false, userInfo: null, error: 'User not found' });
+        res.json({ usernameExists: false, userInfo: null, error: 'User not found' });
       }
     }
   );
