@@ -143,9 +143,9 @@ app.post('/check-username/:username', async (req, res) => {
   );
 });
 
-// app.post('/logout', (req, res) => {
-
-// })
+app.post('/logout', verifyToken, (req, res) => {
+  res.json({ success: true, message: "Logout is Successful" })
+})
 
 app.get('/user-balance/:username', verifyToken, (req, res) => {
   const username = req.params.username;
