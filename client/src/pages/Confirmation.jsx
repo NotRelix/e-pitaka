@@ -47,7 +47,11 @@ function Confirmation() {
           amount: userInfoTo.amountSent,
         }
       )
-      navigate('/e-pitaka/send/receipt')
+      navigate('/e-pitaka/send/receipt', {
+        state: {
+          userInfoTo
+        }
+      })
     } catch (err) {
       console.error("Error transferring money:", err);
     }

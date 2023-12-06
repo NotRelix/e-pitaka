@@ -23,11 +23,11 @@ function ChangePass(props){
                             <h3>CHANGE PASSWORD</h3>
                         </center>
                         <form>
-                            <label for="CurrentPass">Current Password:</label><br/>
+                            <label htmlFor="CurrentPass">Current Password:</label><br/>
                             <input type="text" id="CurrentPass" name="CurrentPass" className="change-input"></input><br/>
-                            <label for="NewPass">New Password:</label><br/>
+                            <label htmlFor="NewPass">New Password:</label><br/>
                             <input type="text" id="NewPass" name="NewPass" className="change-input"></input><br/>
-                            <label for="RetypePass">Retype New Password:</label><br/>
+                            <label htmlFor="RetypePass">Retype New Password:</label><br/>
                             <input type="text" id="RetypePass" name="RetypePass" className="change-input"></input><br/>
                             <center>
                                 <button className="change-from-btn">RESET PASSWORD</button>
