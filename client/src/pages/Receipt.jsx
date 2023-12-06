@@ -1,11 +1,13 @@
 import "../styles/Receipt.css";
 import closeButton from "../assets/close_ring_light.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import userprofile from '../assets/user_profile.png'
 import check from '../assets/checkmark.png'
 
 function Receipt() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { userInfoTo } = location.state;
 
   const handleCloseClick = () => {
     navigate("/e-pitaka/home");
@@ -25,8 +27,8 @@ function Receipt() {
         <div className="user-details">
             <img src={check} className="check-mark" />
             <img src={userprofile} className="user-profile" />
-            <h4>FULL NAME</h4>
-            <h5>username</h5>
+            <h4>{userInfoTo.firstName} {userInfoTo.lastName}</h4>
+            <h5>{userInfoTo.receiver}</h5>
             </div>
             <hr className="line-below-amount"/>
             <div className="amount-section">
@@ -35,8 +37,8 @@ function Receipt() {
               <h3>TOTAL AMOUNT SENT:</h3>
               </div>
               <div className="confirm-rightside">
-              <h3>money</h3>
-              <h3>cash</h3>
+              <h3>₱ {userInfoTo.amountSent}</h3>
+              <h3>₱ {userInfoTo.amountSent}</h3>
               </div>
             </div>
         </div>
