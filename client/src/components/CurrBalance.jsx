@@ -14,8 +14,13 @@ const CurrBalance = ({ username }) => {
 
  const fetchUserBalance = async () => {
   try {
-    // const token = localStorage.getItem('token')
-    const response = await axios.get(`http://localhost:3000/user-balance/${username}`)
+    const token = localStorage.getItem('token')
+    console.log('Token:', token)
+    const response = await axios.get(`http://localhost:3000/user-balance/${username}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
 
     // {
     //   headers: {
