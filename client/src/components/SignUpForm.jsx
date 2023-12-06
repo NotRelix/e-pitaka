@@ -58,8 +58,8 @@ function SignUpForm({ handleLogin, setUsername }) {
         inputData
       );
 
-      // const token = data.token
-      // localStorage.setItem('token', token)
+      const token = data.token
+      localStorage.setItem('token', token)
       setUsername(username)
       handleLogin();
       console.log('Server responded with:', data);

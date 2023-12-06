@@ -3,13 +3,13 @@ const app = express()
 const port = 3000
 const sql = require('mysql2')
 const bcrypt = require('bcrypt')
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 app.use(express.json())
 app.use(require('cors')())
 const { findUserById, updateUserBalance, saveTransaction } = require('./mysqlUtility');
 
 const saltRounds = 10
-// const secretKey = '31415'
+const secretKey = '31415'
 
 const conn = sql.createConnection({
   host: 'localhost',
@@ -18,25 +18,26 @@ const conn = sql.createConnection({
   database: 'epitaka-db'
 })
 
-// const generateToken = (username) => {
-//   return jwt.sign({ username }, secretKey, { expiresIn: '1h'} )
-// }
+const generateToken = (username) => {
+  return jwt.sign({ username }, secretKey, { expiresIn: '1h'} )
+}
 
-// const verifyToken = (req, res, next) => {
-//   const token = req.headers.authorization
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization
+  const authToken = token.split(" ")[1]
 
-//   if (!token) {
-//     return res.status(401).json({ error: 'Unauthorized: Token Missing' });
-//   }
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized: Token Missing' });
+  }
 
-//   jwt.verify(token, secretKey, (err, decoded) => {
-//     if (err) {
-//       return res.status(401).json({ error: 'Unauthorized: Token is Invalid' });
-//     }
-//     req.username = decoded.username;
-//     next()
-//   })
-// }
+  jwt.verify(authToken, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: 'Unauthorized: Token is Invalid' });
+    }
+    req.username = decoded.username;
+    next()
+  })
+}
 
 const checkUsername = (username) => {
   return new Promise((resolve, reject) => {
@@ -70,8 +71,9 @@ app.post('/sign-up', async (req, res) => {
         console.error("Error inserting into 'user' table:", err)
         return res.status(500).json({ error: "Failed to insert into 'user' table" });
       }
-      // const token = generateToken(username)
-      // res.json({ token })
+      const token = generateToken(username)
+      console.log('Token:', token)
+      res.json({ token })
       console.log("Inserted Successfully")
     }
   )
@@ -127,9 +129,9 @@ app.post('/check-username/:username', async (req, res) => {
 
         if (passwordMatch) {
           console.log("Password is correct");
-          // const token = generateToken(username)
-          // console.log('JWT Token:', token);
-          res.json({ usernameExists, userInfo}); //another parameter here ,token
+          const token = generateToken(username)
+          console.log('JWT Token:', token);
+          res.json({ usernameExists, userInfo, token }); //another parameter here ,token
         } else {
           console.log("Incorrect password");
           res.status(401).json({ usernameExists: false, userInfo: null, error: 'Incorrect password' });
@@ -142,7 +144,11 @@ app.post('/check-username/:username', async (req, res) => {
   );
 });
 
-app.get('/user-balance/:username', (req, res) => {
+// app.post('/logout', (req, res) => {
+
+// })
+
+app.get('/user-balance/:username', verifyToken, (req, res) => {
   const username = req.params.username;
   conn.query(
     "SELECT `Balance` FROM `account` WHERE `Username` = ?", [username], (err, data) => {
