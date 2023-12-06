@@ -87,7 +87,7 @@ function App() {
             <Route path="e-pitaka/deposit" element={<Deposit />} />
             <Route path="e-pitaka/about-us" element={<AboutUs />} />
             <Route path="e-pitaka/send" element={<Send />} />
-            <Route path="e-pitaka/history" element={<History />} />
+            <Route path="e-pitaka/history" element={<History username={username}/>} />
             <Route path="e-pitaka/savings" element={<Savings />} />
             <Route path="e-pitaka/send/confirm" element={<Confirmation />} />
             <Route path="e-pitaka/send/receipt" element={<Receipt />} />
