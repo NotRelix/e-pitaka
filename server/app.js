@@ -190,11 +190,11 @@ app.post("/api/transfer", async (req, res) => {
     const receiver = await findUserById(receiverID);
 
     if (!sender || !receiver) {
-      return res.status(400).json({ error: "Invalid sender or receiver ID" });
+      return res.status(400).json({ success: false, error: "Invalid sender or receiver ID" });
     }
 
-    if (sender.Balance < amount) {
-      return res.status(400).json({ error: "Insufficient Balance" });
+    if (sender.Balance < amount || sender.balance <= 0) {
+      return res.json({ success: false, error: "Insufficient Balance" });
     }
 
     await updateUserBalance(

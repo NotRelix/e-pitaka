@@ -12,6 +12,7 @@ function Confirmation() {
   const userInfoTo = location.state;
   const [userInfoFrom, setUserInfoFrom] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lacking, setLacking] = useState(false)
 
   const handleCloseClick = () => {
     navigate("/e-pitaka/send");
@@ -26,6 +27,11 @@ function Confirmation() {
           senderID: response.data.userInfo.id,
           balance: response.data.userInfo.balance
         })  
+        if (parseFloat(response.data.userInfo.balance) <= 0 || parseFloat(response.data.userInfo.balance) < parseFloat(userInfoTo.amountSent)) {
+          setLacking(true);
+        } else {
+          setLacking(false)
+        }
       } catch (err) {
         console.error("Error fetching sender info:", err);
       } finally {
@@ -39,7 +45,7 @@ function Confirmation() {
     e.preventDefault();
 
     try {
-      await axios.post(
+      const response = await axios.post(
         "http://127.0.0.1:3000/api/transfer",
         {
           senderID: userInfoFrom.senderID,
@@ -48,6 +54,7 @@ function Confirmation() {
           note: userInfoTo.note
         }
       )
+      console.log(response.data)
       navigate('/e-pitaka/send/receipt', {
         state: {
           userInfoTo
@@ -98,14 +105,23 @@ function Confirmation() {
           <hr className="line-below-amount" />
           <p>Confirmed transactions will not be refunded. Please make sure that the details above are correct.</p>
           <div className="button-container">
-            <button
-              type="submit"
-              className="next-button"
-              onClick={handleSend}
-              disabled={!userInfoFrom}
-            >
-              SEND
-            </button>
+            { !lacking ?
+              <button
+                type="submit"
+                className="next-button"
+                onClick={handleSend}
+                disabled={!userInfoFrom}
+              >
+                SEND
+              </button>
+              :
+              <button
+                className="next-button error"
+                disabled
+              >
+                Insufficient Funds
+              </button>
+            }
           </div>
         </div>
       </div>
