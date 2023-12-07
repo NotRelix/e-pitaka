@@ -45,6 +45,7 @@ function Confirmation() {
           senderID: userInfoFrom.senderID,
           receiverID: userInfoTo.receiverID,
           amount: userInfoTo.amountSent,
+          note: userInfoTo.note
         }
       )
       navigate('/e-pitaka/send/receipt', {

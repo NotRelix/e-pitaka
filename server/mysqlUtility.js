@@ -44,11 +44,11 @@ async function updateUserBalance(userId, newBalance) {
     })
 }
 
-async function saveTransaction(senderID, receiverID, amount) {
+async function saveTransaction(senderID, receiverID, amount, note) {
     return new Promise((resolve, reject) => {
         conn.query(
-            'INSERT INTO user_transaction (Sender_ID, Receiver_ID, Amount, Date, uTransaction_type) VALUES (?, ?, ?, NOW(), "send")',
-            [senderID, receiverID, amount],
+            'INSERT INTO user_transaction (Sender_ID, Receiver_ID, Amount, Date, Note) VALUES (?, ?, ?, NOW(), ?)',
+            [senderID, receiverID, amount, note],
             (err, data) => {
                 if (err) {
                     console.error("Failed to Insert into User Transaction")

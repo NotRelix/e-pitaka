@@ -160,11 +160,11 @@ app.post("/check-username/:username", async (req, res) => {
   );
 });
 
-app.post('/logout', verifyToken, (req, res) => {
+app.post('/logout', /*verifyToken,*/ (req, res) => {
   res.json({ success: true, message: "Logout is Successful" })
 })
 
-app.get("/user-balance/:username", verifyToken, (req, res) => {
+app.get("/user-balance/:username", /*verifyToken,*/ (req, res) => {
   const username = req.params.username;
   conn.query(
     "SELECT `Balance` FROM `account` WHERE `Username` = ?",
@@ -183,7 +183,7 @@ app.get("/user-balance/:username", verifyToken, (req, res) => {
 });
 
 app.post("/api/transfer", async (req, res) => {
-  const { senderID, receiverID, amount } = req.body;
+  const { senderID, receiverID, amount, note } = req.body;
 
   try {
     const sender = await findUserById(senderID);
@@ -206,7 +206,7 @@ app.post("/api/transfer", async (req, res) => {
       parseFloat(receiver.balance) + parseFloat(amount)
     );
 
-    await saveTransaction(senderID, receiverID, amount);
+    await saveTransaction(senderID, receiverID, amount, note);
 
     return res.status(200).json({ success: true });
   } catch (err) {
