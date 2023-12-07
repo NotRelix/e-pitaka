@@ -66,14 +66,15 @@ app.post("/sign-up", async (req, res) => {
   const lastName = req.body.lname;
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
   const userExists = await checkUsername(username);
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   if (userExists) {
     return res.json({ error: "User already Exists" })
   }
   conn.query(
-    "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
-    [username, hashedPassword, firstName, lastName],
+    "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`, `Email`) VALUES (?, ?, ?, ?, ?)",
+    [username, hashedPassword, firstName, lastName, email],
     (err, data) => {
       if (err) {
         console.error("Error inserting into 'user' table:", err);
@@ -117,6 +118,22 @@ app.get("/check-username/:username", (req, res) => {
     }
   );
 });
+
+app.get('/check-email/:email', (req, res) => {
+  const email = req.params.email;
+  conn.query(
+    "SELECT * FROM `account` WHERE `Email` = ?",
+    [email],
+    (err, data) => {
+      if (err) {
+        console.error("Failed to Check for Email:", err)
+        return res.status(500).json({ error: "Failed to check for email." })
+      }
+      const emailExists = data.length > 0
+      res.json({ emailExists })
+    }
+  )
+})
 
 //login endpoint
 app.post("/check-username/:username", async (req, res) => {
