@@ -390,6 +390,47 @@ app.patch("/edit-user/:username", async (req, res) => {
   }
 });
 
+app.put("/change-password/:username", async (req, res) => {
+  const username = req.params.username;
+  const newPassword = req.body.newPassword
+  const currentPassword = req.body.currentPassword
+
+  conn.query(
+    "SELECT `Password` FROM `account` WHERE `Username` = ?",
+    [username],
+    async (err, data) => {
+      if (err) {
+        console.error("Failed to retrieve current password:", err)
+        return res.status(500).json({ error: "Failed to change password." })
+      }
+
+      if (data.length === 0) {
+        return res.status(404).json({ error: "User not found." })
+      }
+
+      const storedPassword = data[0].Password
+      const passwordMatch = await bcrypt.compare(currentPassword, storedPassword)
+
+      if (!passwordMatch) {
+        return res.status(401).json({ error: "Current password is incorrect." })
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, saltRounds)
+      conn.query(
+        "UPDATE `account` SET `Password` = ? WHERE `Username` = ?",
+        [hashedPassword, username],
+        (updateErr, updateData) => {
+          if (updateErr) {
+            console.error("Failed to change password:", updateErr)
+            return res.status(500).json({ error: "Failed to change password." })
+          }
+          res.json({ success: true })
+        }
+      )
+    }
+  )
+})
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
