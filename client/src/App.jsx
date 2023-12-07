@@ -14,6 +14,7 @@ import Confirmation from "./pages/Confirmation";
 import Receipt from "./pages/Receipt";
 import Settings from "./pages/Settings";
 import AdminDashboard from "./pages/AdminDashboard";
+import UserInfo from "./pages/UserInfo";
 import "./App.css";
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
             <Route path="e-pitaka/send/receipt" element={<Receipt />} />
             <Route path="e-pitaka/settings" element={<Settings />} />
             <Route path="e-pitaka/admin" element={<AdminDashboard />} />
+            <Route path="e-pitaka/profile" element={<UserInfo />} />
           </Routes>
         </BrowserRouter>
       </div>
