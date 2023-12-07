@@ -59,7 +59,7 @@ function HistoryPopup({ username, popUpInfo, showPopup, setShowPopup }) {
                   </p>
                   <hr />
                   <div className="note-container">
-                    <h6>Note: </h6>
+                    <h6>Note: {popUpInfo.Message}</h6>
                   </div>
                 </div>
               ) : (
@@ -79,7 +79,7 @@ function HistoryPopup({ username, popUpInfo, showPopup, setShowPopup }) {
                   </p>
                   <hr />
                   <div className="note-container">
-                    <h6>Note: </h6>
+                    <h6>Note: {popUpInfo.Message}</h6>
                   </div>
                 </div>
               )}

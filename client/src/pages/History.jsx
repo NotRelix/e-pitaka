@@ -29,7 +29,7 @@ function History({ username }) {
       const list = response.data;
       setTransactions(list);
     } catch (err) {
-      window.alert(e.message);
+      window.alert(err.message);
     }
   };
 
@@ -58,11 +58,11 @@ function History({ username }) {
           />
         </div>
         <div className="card-body">
-          <TransactionList
+          {transactions.length > 0? <TransactionList
             username={username}
             transactions={transactions}
             handleListItemClick={handleListItemClick}
-          />
+          />: <p className="empty-history">You have not initiated or received any transactions yet</p>}
         </div>
       </div>
 

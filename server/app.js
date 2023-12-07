@@ -66,14 +66,15 @@ app.post("/sign-up", async (req, res) => {
   const lastName = req.body.lname;
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
   const userExists = await checkUsername(username);
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   if (userExists) {
     return res.json({ error: "User already Exists" })
   }
   conn.query(
-    "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`) VALUES (?, ?, ?, ?)",
-    [username, hashedPassword, firstName, lastName],
+    "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`, `Email`) VALUES (?, ?, ?, ?, ?)",
+    [username, hashedPassword, firstName, lastName, email],
     (err, data) => {
       if (err) {
         console.error("Error inserting into 'user' table:", err);
@@ -117,6 +118,22 @@ app.get("/check-username/:username", (req, res) => {
     }
   );
 });
+
+app.get('/check-email/:email', (req, res) => {
+  const email = req.params.email;
+  conn.query(
+    "SELECT * FROM `account` WHERE `Email` = ?",
+    [email],
+    (err, data) => {
+      if (err) {
+        console.error("Failed to Check for Email:", err)
+        return res.status(500).json({ error: "Failed to check for email." })
+      }
+      const emailExists = data.length > 0
+      res.json({ emailExists })
+    }
+  )
+})
 
 //login endpoint
 app.post("/check-username/:username", async (req, res) => {
@@ -221,17 +238,16 @@ app.get("/user-transactions/:username", (req, res) => {
     `WITH CombinedTransactions AS(
       SELECT
           UT.uTransaction_ID AS Transaction_ID,
-          UT.uTransaction_type AS Transaction_type,
+          NULL AS Transaction_type,
           UT.Sender_ID AS Source_ID,
           S.Username AS Source_username,
           S.FName AS Source_fname,
           S.LName AS Source_lname,
-          S.Profile_pic AS Source_picture,
           UT.Receiver_ID AS Destination_ID,
           R.Username AS Destination_username,
           R.FName AS Destination_fname,
           R.LName AS Destination_lname,
-          R.Profile_pic AS Destination_picture,
+          UT.Note AS Message,
           UT.Amount,
           UT.Date
       FROM user_transaction UT
@@ -247,12 +263,11 @@ app.get("/user-transactions/:username", (req, res) => {
           A.Username AS Source_username,
           A.FName AS Source_fname,
           A.LName AS Source_lname,
-          A.Profile_pic AS Source_picture,
           NULL AS Destination_ID,
           NULL AS Destination_username,
           NULL AS Destination_fname,
           NULL AS Destination_lname,
-          NULL AS Destination_picture,
+          NULL AS Message,
           ADT.Amount,
           ADT.Date
       FROM admin_transaction ADT JOIN account A ON ADT.Account_ID = A.Account_ID 

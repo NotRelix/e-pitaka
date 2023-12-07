@@ -45,3 +45,9 @@
   z-index: 1000;
   backdrop-filter: blur(5px);
 } 
+
+.empty-history{
+  margin: 50px;
+  text-align: center;
+  color: gray;
+}
