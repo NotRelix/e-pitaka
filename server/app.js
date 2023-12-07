@@ -10,6 +10,7 @@ const {
   findUserById,
   updateUserBalance,
   saveTransaction,
+  saveAdminTransaction,
 } = require("./mysqlUtility");
 
 const saltRounds = 10;
@@ -70,7 +71,7 @@ app.post("/sign-up", async (req, res) => {
   const userExists = await checkUsername(username);
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   if (userExists) {
-    return res.json({ error: "User already Exists" })
+    return res.json({ error: "User already Exists" });
   }
   conn.query(
     "INSERT INTO `account` (`Username`, `Password`, `FName`, `LName`, `Email`) VALUES (?, ?, ?, ?, ?)",
@@ -119,21 +120,21 @@ app.get("/check-username/:username", (req, res) => {
   );
 });
 
-app.get('/check-email/:email', (req, res) => {
+app.get("/check-email/:email", (req, res) => {
   const email = req.params.email;
   conn.query(
     "SELECT * FROM `account` WHERE `Email` = ?",
     [email],
     (err, data) => {
       if (err) {
-        console.error("Failed to Check for Email:", err)
-        return res.status(500).json({ error: "Failed to check for email." })
+        console.error("Failed to Check for Email:", err);
+        return res.status(500).json({ error: "Failed to check for email." });
       }
-      const emailExists = data.length > 0
-      res.json({ emailExists })
+      const emailExists = data.length > 0;
+      res.json({ emailExists });
     }
-  )
-})
+  );
+});
 
 //login endpoint
 app.post("/check-username/:username", async (req, res) => {
@@ -167,37 +168,51 @@ app.post("/check-username/:username", async (req, res) => {
           res.json({ usernameExists, userInfo, token }); //another parameter here ,token
         } else {
           console.log("Incorrect password");
-          res.json({ usernameExists: false, userInfo: null, error: 'Incorrect password' });
+          res.json({
+            usernameExists: false,
+            userInfo: null,
+            error: "Incorrect password",
+          });
         }
       } else {
         console.log("User not found");
-        res.json({ usernameExists: false, userInfo: null, error: 'User not found' });
+        res.json({
+          usernameExists: false,
+          userInfo: null,
+          error: "User not found",
+        });
       }
     }
   );
 });
 
-app.post('/logout', /*verifyToken,*/ (req, res) => {
-  res.json({ success: true, message: "Logout is Successful" })
-})
+app.post(
+  "/logout",
+  /*verifyToken,*/ (req, res) => {
+    res.json({ success: true, message: "Logout is Successful" });
+  }
+);
 
-app.get("/user-balance/:username", /*verifyToken,*/ (req, res) => {
-  const username = req.params.username;
-  conn.query(
-    "SELECT `Balance` FROM `account` WHERE `Username` = ?",
-    [username],
-    (err, data) => {
-      if (err) {
-        console.error("Failed to retrieve User Balance:", err);
-        return res
-          .status(500)
-          .json({ error: "Failed to retrieve User Balance." });
+app.get(
+  "/user-balance/:username",
+  /*verifyToken,*/ (req, res) => {
+    const username = req.params.username;
+    conn.query(
+      "SELECT `Balance` FROM `account` WHERE `Username` = ?",
+      [username],
+      (err, data) => {
+        if (err) {
+          console.error("Failed to retrieve User Balance:", err);
+          return res
+            .status(500)
+            .json({ error: "Failed to retrieve User Balance." });
+        }
+        const userBalance = data.length > 0 ? data[0].Balance : null;
+        res.json({ userBalance });
       }
-      const userBalance = data.length > 0 ? data[0].Balance : null;
-      res.json({ userBalance });
-    }
-  );
-});
+    );
+  }
+);
 
 app.post("/api/transfer", async (req, res) => {
   const { senderID, receiverID, amount, note } = req.body;
@@ -207,7 +222,9 @@ app.post("/api/transfer", async (req, res) => {
     const receiver = await findUserById(receiverID);
 
     if (!sender || !receiver) {
-      return res.status(400).json({ success: false, error: "Invalid sender or receiver ID" });
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid sender or receiver ID" });
     }
 
     if (sender.Balance < amount || sender.balance <= 0) {
@@ -224,6 +241,43 @@ app.post("/api/transfer", async (req, res) => {
     );
 
     await saveTransaction(senderID, receiverID, amount, note);
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Error Processing Money Transaction:", err);
+    res.send({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/api/admin-transfer", async (req, res) => {
+  const { amount, transaction_type, account_id } = req.body;
+
+  try {
+    const account = await findUserById(account_id);
+
+    if (!account) {
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid account ID" });
+    }
+
+    if (transaction_type === "deposit") {
+      await updateUserBalance(
+        account_id,
+        parseFloat(account.balance) + parseFloat(amount)
+      );
+    } else if (transaction_type === "withdraw") {
+      await updateUserBalance(
+        account_id,
+        parseFloat(account.balance) - parseFloat(amount)
+      );
+    } else {
+      return res
+        .status(400)
+        .json({ success: false, error: "Invalid transaction type" });
+    }
+
+    await saveAdminTransaction(amount, transaction_type, account_id);
 
     return res.status(200).json({ success: true });
   } catch (err) {
@@ -277,14 +331,30 @@ app.get("/user-transactions/:username", (req, res) => {
     [username, username],
     (err, data) => {
       if (err) {
-        res.status(500).json({ error: "Failed to retrieve User Transactions." });
+        res
+          .status(500)
+          .json({ error: "Failed to retrieve User Transactions." });
       }
       res.json(data);
     }
   );
 });
 
-app.patch('/edit-user/:username', async (req, res) => {
+//retrieves all regular users
+app.get("/user-list", (req, res) => {
+  const username = req.params.username;
+  conn.query(
+    `SELECT * FROM account WHERE User_type = 'regular'`,
+    (err, data) => {
+      if (err) {
+        res.status(500).json({ error: "Failed to retrieve User List." });
+      }
+      res.json(data);
+    }
+  );
+});
+
+app.patch("/edit-user/:username", async (req, res) => {
   const username = req.params.username;
   const { firstName, lastName } = req.body;
 
@@ -293,12 +363,12 @@ app.patch('/edit-user/:username', async (req, res) => {
     const updateValues = [];
 
     if (firstName) {
-      updateFields.push('`FName` = ?');
+      updateFields.push("`FName` = ?");
       updateValues.push(firstName);
     }
 
     if (lastName) {
-      updateFields.push('`LName` = ?');
+      updateFields.push("`LName` = ?");
       updateValues.push(lastName);
     }
 
@@ -306,7 +376,9 @@ app.patch('/edit-user/:username', async (req, res) => {
       return res.status(400).json({ error: "No fields provided for update" });
     }
 
-    const updateQuery = `UPDATE \`account\` SET ${updateFields.join(", ")} WHERE \`Username\`=?`;
+    const updateQuery = `UPDATE \`account\` SET ${updateFields.join(
+      ", "
+    )} WHERE \`Username\`=?`;
     const updateParams = [...updateValues, username];
 
     await conn.promise().execute(updateQuery, updateParams);
@@ -317,7 +389,6 @@ app.patch('/edit-user/:username', async (req, res) => {
     res.status(500).json({ error: "Failed to update user profile" });
   }
 });
-
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
