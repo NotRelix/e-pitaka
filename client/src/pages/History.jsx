@@ -58,11 +58,11 @@ function History({ username }) {
           />
         </div>
         <div className="card-body">
-          <TransactionList
+          {transactions.length > 0? <TransactionList
             username={username}
             transactions={transactions}
             handleListItemClick={handleListItemClick}
-          />
+          />: <p className="empty-history">You have not initiated or received any transactions yet</p>}
         </div>
       </div>
 
