@@ -16,6 +16,10 @@ function History({ username }) {
     fetchTransactions();
   }, [username]);
 
+  useEffect(() => {
+    console.log(transactions);
+  }, [transactions]);
+
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
@@ -44,12 +48,6 @@ function History({ username }) {
 
   return (
     <>
-      {showPopup && (
-        <div className="popup-container">
-          <HistoryPopup onClose={handleClosePopup} popUpInfo={popUpInfo} />
-        </div>
-      )}
-
       <div className="card history-container">
         <div className="card-header line-color">
           <h3>HISTORY</h3>
@@ -60,9 +58,20 @@ function History({ username }) {
           />
         </div>
         <div className="card-body">
-          <TransactionList username={username} transactions={transactions} handleListItemClick={handleListItemClick}/>
+          <TransactionList
+            username={username}
+            transactions={transactions}
+            handleListItemClick={handleListItemClick}
+          />
         </div>
       </div>
+
+      <HistoryPopup
+        username={username}
+        popUpInfo={popUpInfo}
+        showPopup={showPopup}
+        setShowPopup={setShowPopup}
+      />
     </>
   );
 }

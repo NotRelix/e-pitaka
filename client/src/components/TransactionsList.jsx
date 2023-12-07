@@ -27,7 +27,7 @@ const TransactionList = ({ username, transactions, handleListItemClick }) => {
                 <small>{item.Destination_username !== username? `sent to ${item.Destination_username}`: `sent from ${item.Source_username}`}</small>
               )}
             </div>
-            <small>{item.Date}</small>
+            <small>{new Date(item.Date).toLocaleString()}</small>
           </li>
         ))}
       </ul>
