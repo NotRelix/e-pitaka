@@ -8,6 +8,8 @@ function SignUpForm({ handleLogin, setUsername }) {
   const [lname, setLname] = useState('');
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [emailExists, setEmailExists] = useState(false);
   const [userExists, setUserExists] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -33,6 +35,21 @@ function SignUpForm({ handleLogin, setUsername }) {
     }
   }, [username])
 
+  useEffect(() => {
+    const checkEmail = async () => {
+      if(email) {
+        try {
+          const emailResponse = await axios.get(`http://127.0.0.1:3000/check-email/${email}`)
+          const emailExists = emailResponse.data.emailExists
+          setEmailExists(emailExists)
+        } catch (error) {
+          console.error("Error checking email:", error)
+        }
+      }
+    }
+    checkEmail()
+  }, [email])
+
   // Called when the button with type="submit" inside the form is pressed
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +64,11 @@ function SignUpForm({ handleLogin, setUsername }) {
       return;
     }
 
-    const inputData = { fname, lname, username, password };
+    if(emailExists) {
+      console.error("Email is already taken.")
+    }
+
+    const inputData = { fname, lname, username, password, email };
 
     console.log('Submitting Sign Up Form details...');
     console.table(inputData);
@@ -83,6 +104,7 @@ function SignUpForm({ handleLogin, setUsername }) {
           <h3>CREATE ACCOUNT</h3>
           {userExists && <p className='text-danger'>Username Already Exists</p>}
           {password != confirmPassword && confirmPassword && <p className='text-danger'>Passwords Do Not Match</p>}
+          {emailExists && <p className='text-danger'>Email Has Already Been Taken</p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>
@@ -121,6 +143,19 @@ function SignUpForm({ handleLogin, setUsername }) {
               />
             </div>
           </div>
+          <div className='row input-area'>
+            <div className='col'>
+              <label>Email Address</label>
+              <input
+                onChange={(e) => {
+                  handleChange(e, setEmail)
+                }}
+                type='email'
+                className='form-control'
+                required
+              />
+            </div>
+          </div>
           <div className="row input-area">
             <div className="col">
               <label>Your Password</label>
@@ -144,15 +179,6 @@ function SignUpForm({ handleLogin, setUsername }) {
                 type='password'
                 className='form-control'
                 required
-              />
-            </div>
-          </div>
-          <div className="row input-area">
-            <div className="col">
-              <label>Valid ID</label>
-              <input
-                type="file"
-                className="form-control"
               />
             </div>
           </div>
