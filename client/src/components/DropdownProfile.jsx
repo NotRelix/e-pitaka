@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import "../styles/Navbar.css";
 import userLogo from "../assets/user_profile_wh.png";
 import axios from "axios";
 
 function DropdownProfile({ handleLogout }) {
+    const navigate = useNavigate();
+
     const [open, setOpen] = useState(false)
     const menuRef = useRef();
     const imgRef = useRef();
@@ -29,6 +31,7 @@ function DropdownProfile({ handleLogout }) {
                 localStorage.removeItem('token')
                 handleLogout()
                 console.log(`Token after logout: ${localStorage.getItem('token')}`)
+                navigate('/e-pitaka/')
             } else {
                 console.error(response.data.message || 'Logout failed')
             }
