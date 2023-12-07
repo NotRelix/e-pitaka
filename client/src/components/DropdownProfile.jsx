@@ -53,7 +53,7 @@ function DropdownProfile({ handleLogout }) {
                         <ul>
                             <NavLink to="e-pitaka/settings" onClick={() => setOpen(false)} className="profile-link">ACCOUNT SETTINGS</NavLink>
                             <hr />
-                            <NavLink to="e-pitaka/" onClick={() => setOpen(false)} className="profile-link">DOCUMENTS</NavLink>
+                            <NavLink to="e-pitaka/profile" onClick={() => setOpen(false)} className="profile-link">USER PROFILE</NavLink>
                             <button onClick={handleLogoutClick} className="log-out">Log Out</button>
                         </ul>
                     </div>
