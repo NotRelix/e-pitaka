@@ -37,10 +37,6 @@ function History({ username }) {
     navigate("/e-pitaka/home");
   };
 
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
-
   const handleListItemClick = (transaction) => {
     setPopUpInfo(transaction);
     setShowPopup(!showPopup);

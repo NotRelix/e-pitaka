@@ -24,7 +24,7 @@ const TransactionList = ({ username, transactions, handleListItemClick }) => {
               item.Transaction_type === "withdraw" ? (
                 <small>{item.Transaction_type}</small>
               ) : (
-                <small>{item.Destination_username !== username? `sent to ${item.Destination_username}`: `sent from ${item.Source_username}`}</small>
+                <small>{item.Destination_username !== username? `sent to ${item.Destination_username ?? "deleted user"}`: `sent from ${item.Source_username ?? "deleted user"}`}</small>
               )}
             </div>
             <small>{new Date(item.Date).toLocaleString()}</small>

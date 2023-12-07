@@ -251,8 +251,8 @@ app.get("/user-transactions/:username", (req, res) => {
           UT.Amount,
           UT.Date
       FROM user_transaction UT
-      JOIN account S ON UT.Sender_ID = S.Account_ID
-      JOIN account R ON UT.Receiver_ID = R.Account_ID
+      LEFT JOIN account S ON UT.Sender_ID = S.Account_ID
+      LEFT JOIN account R ON UT.Receiver_ID = R.Account_ID
   
       UNION ALL
   
