@@ -284,6 +284,41 @@ app.get("/user-transactions/:username", (req, res) => {
   );
 });
 
+app.patch('/edit-user/:username', async (req, res) => {
+  const username = req.params.username;
+  const { firstName, lastName } = req.body;
+
+  try {
+    const updateFields = [];
+    const updateValues = [];
+
+    if (firstName) {
+      updateFields.push('`FName` = ?');
+      updateValues.push(firstName);
+    }
+
+    if (lastName) {
+      updateFields.push('`LName` = ?');
+      updateValues.push(lastName);
+    }
+
+    if (updateFields.length === 0) {
+      return res.status(400).json({ error: "No fields provided for update" });
+    }
+
+    const updateQuery = `UPDATE \`account\` SET ${updateFields.join(", ")} WHERE \`Username\`=?`;
+    const updateParams = [...updateValues, username];
+
+    await conn.promise().execute(updateQuery, updateParams);
+
+    res.json({ success: true, message: "Profile updated successfully" });
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    res.status(500).json({ error: "Failed to update user profile" });
+  }
+});
+
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

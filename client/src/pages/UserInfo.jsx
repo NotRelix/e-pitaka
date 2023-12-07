@@ -106,6 +106,7 @@ function UserInfo() {
                     <input
                       type="text"
                       value={editedUser.firstName}
+                      className="fname-input"
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
@@ -116,6 +117,7 @@ function UserInfo() {
                     <input
                       type="text"
                       value={editedUser.lastName}
+                      className="lname-input"
                       onChange={(e) =>
                         setEditedUser({
                           ...editedUser,
