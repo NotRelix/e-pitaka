@@ -61,4 +61,21 @@ async function saveTransaction(senderID, receiverID, amount, note) {
     })
 }
 
-module.exports = { findUserById, updateUserBalance, saveTransaction };
+async function saveAdminTransaction(amount, transaction_type, account_id) {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO admin_transaction (Amount, Date, aTransaction_type, Account_ID) VALUES (?, NOW(), ?, ?)',
+            [amount, transaction_type, account_id],
+            (err, data) => {
+                if (err) {
+                    console.error("Failed to Insert into Admin Transaction")
+                    reject(err)
+                    return
+                }
+                resolve(data)
+            }
+        )
+    })
+}
+
+module.exports = { findUserById, updateUserBalance, saveTransaction, saveAdminTransaction };
