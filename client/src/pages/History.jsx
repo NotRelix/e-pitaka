@@ -29,7 +29,7 @@ function History({ username }) {
       const list = response.data;
       setTransactions(list);
     } catch (err) {
-      window.alert(e.message);
+      window.alert(err.message);
     }
   };
 

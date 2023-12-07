@@ -238,17 +238,16 @@ app.get("/user-transactions/:username", (req, res) => {
     `WITH CombinedTransactions AS(
       SELECT
           UT.uTransaction_ID AS Transaction_ID,
-          UT.uTransaction_type AS Transaction_type,
+          NULL AS Transaction_type,
           UT.Sender_ID AS Source_ID,
           S.Username AS Source_username,
           S.FName AS Source_fname,
           S.LName AS Source_lname,
-          S.Profile_pic AS Source_picture,
           UT.Receiver_ID AS Destination_ID,
           R.Username AS Destination_username,
           R.FName AS Destination_fname,
           R.LName AS Destination_lname,
-          R.Profile_pic AS Destination_picture,
+          UT.Note AS Message,
           UT.Amount,
           UT.Date
       FROM user_transaction UT
@@ -264,12 +263,11 @@ app.get("/user-transactions/:username", (req, res) => {
           A.Username AS Source_username,
           A.FName AS Source_fname,
           A.LName AS Source_lname,
-          A.Profile_pic AS Source_picture,
           NULL AS Destination_ID,
           NULL AS Destination_username,
           NULL AS Destination_fname,
           NULL AS Destination_lname,
-          NULL AS Destination_picture,
+          NULL AS Message,
           ADT.Amount,
           ADT.Date
       FROM admin_transaction ADT JOIN account A ON ADT.Account_ID = A.Account_ID 
