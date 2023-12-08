@@ -123,10 +123,10 @@ function App() {
                   element={<Confirmation />}
                 />
                 <Route path="e-pitaka/send/receipt" element={<Receipt />} />
-                <Route path="e-pitaka/settings" element={<Settings />} />
-                <Route path="e-pitaka/profile" element={<UserInfo />} />
               </>
             ) : null}
+            <Route path="e-pitaka/settings" element={<Settings />} />
+            <Route path="e-pitaka/profile" element={<UserInfo />} />
           </Routes>
         </BrowserRouter>
       </div>
