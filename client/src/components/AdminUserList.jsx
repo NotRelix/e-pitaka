@@ -31,7 +31,7 @@ const AdminUserList = ({ userList, handleTransaction }) => {
             </div>
             <div className="right-side">
               <input
-                type="text"
+                type="number"
                 placeholder="Amount"
                 className="amount-input"
                 value={amounts[index]}
