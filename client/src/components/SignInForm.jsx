@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function SignInForm({ handleLogin, setUsername }) {
+function SignInForm({ handleLogin, setUsername, setUserType}) {
   const navigate = useNavigate();
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +27,7 @@ function SignInForm({ handleLogin, setUsername }) {
           password: password,
         });
 
+        console.log(response.data)
         const { usernameExists, userInfo, token} = response.data; //another parameter ,token
 
         if (usernameExists && userInfo && token) { //another condition && token
@@ -34,6 +35,7 @@ function SignInForm({ handleLogin, setUsername }) {
           setUsernameLocal(userInfo.username);
           setUserExists(true);
           setUsername(userInfo.username);
+          setUserType(userInfo.user_type)
           handleToken(token)
         } else {
           console.log("bye");

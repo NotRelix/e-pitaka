@@ -114,6 +114,7 @@ app.get("/check-username/:username", (req, res) => {
           balance: data[0].Balance,
           firstName: data[0].FName,
           lastName: data[0].LName,
+          user_type: data[0].User_type
         }
         : null;
 
@@ -161,7 +162,7 @@ app.post("/check-username/:username", async (req, res) => {
         );
         const usernameExists = true;
         const userInfo = usernameExists
-          ? { username: data[0].Username, password: data[0].Password }
+          ? { username: data[0].Username, password: data[0].Password, user_type: data[0].User_type }
           : null;
 
         if (passwordMatch) {

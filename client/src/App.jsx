@@ -20,81 +20,109 @@ import "./App.css";
 function App() {
   //temporary
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
+  const [userType, setUserType] = useState("");
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', 'true')
-    localStorage.setItem('username', username)
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("username", username);
+    console.log("userType: ", userType);
     console.log("User is Logged In");
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false)
-    localStorage.setItem('isLoggedIn', 'false')
-    localStorage.setItem('username', '')
-    console.log("User is Logged Out")
-  }
+    setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn", "false");
+    localStorage.setItem("username", "");
+    console.log("User is Logged Out");
+  };
 
   useEffect(() => {
-    const storedLoginStatus = localStorage.getItem("isLoggedIn")
-    const storedUsername = localStorage.getItem("username")
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    const storedUsername = localStorage.getItem("username");
 
-    if (storedLoginStatus && storedLoginStatus === 'true') {
-      setIsLoggedIn(true)
-      setUsername(storedUsername)
+    if (storedLoginStatus && storedLoginStatus === "true") {
+      setIsLoggedIn(true);
+      setUsername(storedUsername);
     }
 
-    console.log({storedLoginStatus, storedUsername, username})
-  }, [])
+    console.log({ storedLoginStatus, storedUsername, username });
+  }, []);
 
   return (
     <>
       <div className="main-body">
         <BrowserRouter>
-          <Navbar
-            isLoggedIn={isLoggedIn}
-            handleLogout={handleLogout}
-          />
+          <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Routes>
             <Route
               path="e-pitaka/"
-              element={isLoggedIn
-                ? <Home username={username} />
-                : <SignIn
-                  handleLogin={handleLogin}
-                  setUsername={setUsername}
-                />}
+              element={
+                isLoggedIn ? (
+                  <>
+                    {userType === "regular" ? (
+                      <Home username={username} />
+                    ) : (
+                      <AdminDashboard />
+                    )}
+                  </>
+                ) : (
+                  <SignIn
+                    handleLogin={handleLogin}
+                    setUsername={setUsername}
+                    setUserType={setUserType}
+                  />
+                )
+              }
             />
             <Route
               path="e-pitaka/sign-up"
-              element={<SignUp
-                handleLogin={handleLogin}
-                setUsername={setUsername}
-              />}
+              element={
+                <SignUp handleLogin={handleLogin} setUsername={setUsername} />
+              }
             />
             <Route
               path="e-pitaka/home"
               element={
-                isLoggedIn
-                  ? <Home username={username} />
-                  : <SignIn
+                isLoggedIn ? (
+                  <>
+                    {userType === "regular" ? (
+                      <Home username={username} />
+                    ) : (
+                      <AdminDashboard />
+                    )}
+                  </>
+                ) : (
+                  <SignIn
                     handleLogin={handleLogin}
                     setUsername={setUsername}
+                    setUserType={setUserType}
                   />
+                )
               }
             />
-            <Route path="e-pitaka/help" element={<Help />} />
-            <Route path="e-pitaka/deposit" element={<Deposit />} />
             <Route path="e-pitaka/about-us" element={<AboutUs />} />
-            <Route path="e-pitaka/send" element={<Send />} />
-            <Route path="e-pitaka/history" element={<History username={username}/>} />
-            <Route path="e-pitaka/savings" element={<Savings />} />
-            <Route path="e-pitaka/send/confirm" element={<Confirmation />} />
-            <Route path="e-pitaka/send/receipt" element={<Receipt />} />
-            <Route path="e-pitaka/settings" element={<Settings />} />
-            <Route path="e-pitaka/admin" element={<AdminDashboard />} />
-            <Route path="e-pitaka/profile" element={<UserInfo />} />
+            <Route path="e-pitaka/help" element={<Help />} />
+
+            {userType === "regular" ? (
+              <>
+                <Route path="e-pitaka/deposit" element={<Deposit />} />
+                <Route path="e-pitaka/send" element={<Send />} />
+                <Route
+                  path="e-pitaka/history"
+                  element={<History username={username} />}
+                />
+                <Route path="e-pitaka/savings" element={<Savings />} />
+                <Route
+                  path="e-pitaka/send/confirm"
+                  element={<Confirmation />}
+                />
+                <Route path="e-pitaka/send/receipt" element={<Receipt />} />
+                <Route path="e-pitaka/settings" element={<Settings />} />
+                <Route path="e-pitaka/profile" element={<UserInfo />} />
+              </>
+            ) : null}
           </Routes>
         </BrowserRouter>
       </div>
