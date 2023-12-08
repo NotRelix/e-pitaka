@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const AdminUserList = ({userList, handleTransaction}) => {
-  const [amount, setAmount] = useState(0);
+const AdminUserList = ({ userList, handleTransaction }) => {
+  const [amounts, setAmounts] = useState([]);
+
+  const handleAmounts = (event, index) => {
+    const newAmounts = [...amounts];
+    newAmounts[index] = event.target.value;
+    setAmounts(newAmounts);
+  };
+
+  const handleClick = (id, type, amount, index) => {
+    handleTransaction(id, type, amount);
+    const resetAmounts = [...amounts];
+    resetAmounts[index] = "";
+    setAmounts(resetAmounts);
+  };
 
   return (
     <>
       <ul className="user-list">
-        {userList.map((user) => (
+        {userList.map((user, index) => (
           <li className="user" key={user.Account_ID}>
             <div className="left-side">
               <h4>
@@ -21,11 +34,36 @@ const AdminUserList = ({userList, handleTransaction}) => {
                 type="text"
                 placeholder="Amount"
                 className="amount-input"
-                onChange={(event) => setAmount(event.target.value)}
+                value={amounts[index]}
+                onChange={(event) => handleAmounts(event, index)}
               />
               <div className="admin-buttons">
-                <button className="admin-add" onClick={() => handleTransaction(user.Account_ID, "deposit", amount)}>ADD</button>
-                <button className="admin-subtract" onClick={() => handleTransaction(user.Account_ID, "withdraw", amount)}>SUBTRACT</button>
+                <button
+                  className="admin-add"
+                  onClick={() =>
+                    handleClick(
+                      user.Account_ID,
+                      "deposit",
+                      amounts[index],
+                      index
+                    )
+                  }
+                >
+                  ADD
+                </button>
+                <button
+                  className="admin-subtract"
+                  onClick={() =>
+                    handleClick(
+                      user.Account_ID,
+                      "withdraw",
+                      amounts[index],
+                      index
+                    )
+                  }
+                >
+                  SUBTRACT
+                </button>
               </div>
             </div>
           </li>

@@ -49,7 +49,7 @@ function AdminDashboard() {
       </div>
       <div className="card-body">
         <div className="search-container">
-          <input type="text" className="search-box" placeholder="search for username" onChange={(event) => setSearchInput(event.target.value)}/>
+          <input type="text" className="form-control search-bar" placeholder="search for username" onChange={(event) => setSearchInput(event.target.value)}/>
         </div>
         <h3>USERS</h3>
         <hr className="line-below-amount" />
