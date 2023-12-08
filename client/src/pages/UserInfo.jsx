@@ -87,8 +87,8 @@ function UserInfo() {
       console.log(response.data)
       if (response.data.success) {
         handleLogout()
-        window.location.reload();
         navigate('/e-pitaka/home')
+        window.location.reload();
       }
     } catch (err) {
       console.error(err);

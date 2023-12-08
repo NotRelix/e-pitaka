@@ -83,9 +83,12 @@ function SignUpForm({ handleLogin, setUsername, setUserType }) {
 
       const token = data.token
       localStorage.setItem('token', token)
+      localStorage.setItem("userType", "regular");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", username);
       setUserType("regular")
       setUsername(username)
-      handleLogin();
+      // handleLogin();
       console.log('Server responded with:', data);
       navigate('/e-pitaka/home');
 
