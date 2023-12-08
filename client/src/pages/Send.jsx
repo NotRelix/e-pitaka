@@ -97,6 +97,7 @@ function Send() {
                   type="number"
                   step="any"
                   className="input-box"
+                  min={0}
                   required
                 />
               </div>

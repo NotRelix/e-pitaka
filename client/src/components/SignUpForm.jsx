@@ -105,8 +105,8 @@ function SignUpForm({ handleLogin, setUsername }) {
         <form onSubmit={handleSubmit}>
           <h3>CREATE ACCOUNT</h3>
           {userExists && <p className='sign-up-error'>Username Already Exists</p>}
-          {password != confirmPassword && confirmPassword && <p className='sign-up-error'>Passwords Do Not Match</p>}
           {emailExists && <p className='sign-up-error'>Email Has Already Been Taken</p>}
+          {password != confirmPassword && confirmPassword && <p className='sign-up-error'>Passwords Do Not Match</p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>
