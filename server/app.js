@@ -497,6 +497,20 @@ app.put("/change-password/:username", async (req, res) => {
   )
 })
 
+app.delete("/delete-user/:username", async (req, res) => {
+  
+  try {
+    const { username } = req.params;
+    const deleteQuery = "DELETE FROM `account` WHERE `Username`=?";
+    await conn.promise().query(deleteQuery, [username]);
+
+    res.json({ success: true, message: "Account deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user account:", error);
+    res.status(500).json({ success: false, error: "Failed to delete user account" });
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

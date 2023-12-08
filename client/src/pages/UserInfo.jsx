@@ -44,7 +44,6 @@ function UserInfo() {
       console.error("Error updating user profile:", error)
     }
   }
-  
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -74,6 +73,27 @@ function UserInfo() {
 
     fetchUserInfo();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.setItem("isLoggedIn", "false");
+    localStorage.setItem("username", "");
+    // localStorage.setItem("userType", "");
+    console.log("User is Logged Out");
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://127.0.0.1:3000/delete-user/${user.username}`)
+      console.log(response.data)
+      if (response.data.success) {
+        handleLogout()
+        navigate('/e-pitaka/home')
+        window.location.reload();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
@@ -157,7 +177,7 @@ function UserInfo() {
             )}
           </div>
           <div className="button-container">
-            <button type="submit" className="delete-button">
+            <button onClick={handleDelete} type="submit" className="delete-button">
               DELETE ACCOUNT
             </button>
           </div>

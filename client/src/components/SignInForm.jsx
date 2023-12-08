@@ -40,6 +40,7 @@ function SignInForm({ handleLogin, setUsername, setUserType}) {
           setUsernameLocal(userInfo.username);
           setUserExists(true);
           setUsername(userInfo.username);
+          localStorage.setItem("userType", userInfo.user_type);
           setUserType(userInfo.user_type)
           handleToken(token)
         } else {
