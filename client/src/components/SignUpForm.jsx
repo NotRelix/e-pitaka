@@ -88,6 +88,7 @@ function SignUpForm({ handleLogin, setUsername, setUserType }) {
       localStorage.setItem("username", username);
       setUserType("regular")
       setUsername(username)
+      alert('Account created successfully!');
       // handleLogin();
       console.log('Server responded with:', data);
       navigate('/e-pitaka/home');
