@@ -7,7 +7,6 @@ import axios from "axios";
 function Send() {
   const [sendTo, setSendTo] = useState('');
   const [amount, setAmount] = useState(0);
-  const [note, setNote] = useState('');
   const [exist, setExist] = useState(true);
   const [isYou, setIsYou] = useState(false)
 
@@ -46,7 +45,6 @@ function Send() {
         firstName: response.data.userInfo.firstName,
         lastName: response.data.userInfo.lastName,
         balance: response.data.userInfo.balance,
-        note: note
       }
       // Im pretty much done here (I think) gotta eet dinner brb
       navigate("/e-pitaka/send/confirm", { state: userInfo })
@@ -104,7 +102,7 @@ function Send() {
                 <label htmlFor="message" className="input-label">
                   MESSAGE (Optional):
                 </label>
-                <textarea onChange={(e) => handleChange(e, setNote)} rows="8" className="input-box"></textarea>
+                <textarea rows="8" className="input-box"></textarea>
               </div>
               <div className="row justify-content-center">
                 <button
