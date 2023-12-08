@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import '../styles/SignUp.css';
 import axios from 'axios';
 
-function SignUpForm({ handleLogin, setUsername }) {
+function SignUpForm({ handleLogin, setUsername, setUserType }) {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
   const [username, setUsernameLocal] = useState('');
@@ -83,6 +83,7 @@ function SignUpForm({ handleLogin, setUsername }) {
 
       const token = data.token
       localStorage.setItem('token', token)
+      setUserType("regular")
       setUsername(username)
       handleLogin();
       console.log('Server responded with:', data);

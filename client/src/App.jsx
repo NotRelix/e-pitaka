@@ -51,8 +51,14 @@ function App() {
       setUserType(storedUserType);
     }
 
-    console.log({ storedLoginStatus, storedUsername, username });
+    console.log({ storedLoginStatus, storedUsername, username, storedUserType });
   }, []);
+
+  useEffect(() => {
+    console.log(localStorage.getItem("isLoggedIn"))
+    console.log(localStorage.getItem("userType"))
+    // console.log(localStorage.getItem("isLoggedIn"))
+  })
 
   return (
     <>
@@ -83,7 +89,7 @@ function App() {
             <Route
               path="e-pitaka/sign-up"
               element={
-                <SignUp handleLogin={handleLogin} setUsername={setUsername} />
+                <SignUp setUserType={setUserType} handleLogin={handleLogin} setUsername={setUsername} />
               }
             />
             <Route
