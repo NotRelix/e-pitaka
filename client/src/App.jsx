@@ -27,6 +27,7 @@ function App() {
     setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("username", username);
+    localStorage.setItem("userType", userType);
     console.log("userType: ", userType);
     console.log("User is Logged In");
   };
@@ -35,16 +36,19 @@ function App() {
     setIsLoggedIn(false);
     localStorage.setItem("isLoggedIn", "false");
     localStorage.setItem("username", "");
+    localStorage.setItem("userType", "");
     console.log("User is Logged Out");
   };
 
   useEffect(() => {
     const storedLoginStatus = localStorage.getItem("isLoggedIn");
     const storedUsername = localStorage.getItem("username");
+    const storedUserType = localStorage.getItem("userType");
 
     if (storedLoginStatus && storedLoginStatus === "true") {
       setIsLoggedIn(true);
       setUsername(storedUsername);
+      setUserType(storedUserType);
     }
 
     console.log({ storedLoginStatus, storedUsername, username });

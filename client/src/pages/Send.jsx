@@ -102,7 +102,7 @@ function Send() {
                 <label htmlFor="message" className="input-label">
                   MESSAGE (Optional):
                 </label>
-                <textarea rows="8" className="input-box"></textarea>
+                <textarea  rows="8" className="input-box"></textarea>
               </div>
               <div className="row justify-content-center">
                 <button
