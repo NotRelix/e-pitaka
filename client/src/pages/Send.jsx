@@ -9,6 +9,7 @@ function Send() {
   const [amount, setAmount] = useState(0);
   const [exist, setExist] = useState(true);
   const [isYou, setIsYou] = useState(false)
+  const [note, setNote] = useState('');
 
   const navigate = useNavigate();
 
@@ -45,6 +46,7 @@ function Send() {
         firstName: response.data.userInfo.firstName,
         lastName: response.data.userInfo.lastName,
         balance: response.data.userInfo.balance,
+        note: note  
       }
       // Im pretty much done here (I think) gotta eet dinner brb
       navigate("/e-pitaka/send/confirm", { state: userInfo })
@@ -102,7 +104,7 @@ function Send() {
                 <label htmlFor="message" className="input-label">
                   MESSAGE (Optional):
                 </label>
-                <textarea  rows="8" className="input-box"></textarea>
+                <textarea onChange={(e) => handleChange(e, setNote)} rows="8" className="input-box"></textarea>
               </div>
               <div className="row justify-content-center">
                 <button
