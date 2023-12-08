@@ -293,10 +293,14 @@ app.post("/api/admin-transfer", async (req, res) => {
         parseFloat(account.balance) + parseFloat(amount)
       );
     } else if (transaction_type === "withdraw") {
-      await updateUserBalance(
-        account_id,
-        parseFloat(account.balance) - parseFloat(amount)
-      );
+      if (account.balance < amount) {
+        return res.json({ success: false, error: "Insufficient Balance" });
+      } else {
+        await updateUserBalance(
+          account_id,
+          parseFloat(account.balance) - parseFloat(amount)
+        );
+      }
     } else {
       return res
         .status(400)
@@ -384,7 +388,6 @@ app.get("/user-transactions/:username", (req, res) => {
 
 //retrieves all regular users
 app.get("/user-list", (req, res) => {
-  const username = req.params.username;
   conn.query(
     `SELECT * FROM account WHERE User_type = 'regular'`,
     (err, data) => {
