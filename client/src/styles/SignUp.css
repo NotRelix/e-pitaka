@@ -33,3 +33,8 @@
   color: rgb(71, 255, 156);
   text-decoration: underline;
 }
+
+.sign-up-error {
+  text-align: center;
+  color: red;
+}

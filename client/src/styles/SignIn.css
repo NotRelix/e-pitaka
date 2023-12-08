@@ -1,8 +1,8 @@
 .sign-in-container {
-  margin-top:  50px;
+  margin-top: 50px;
 }
 
-.sign-in-container > .row {
+.sign-in-container>.row {
   gap: 50px;
 }
 
@@ -13,7 +13,7 @@
   transition: 0.5s;
 }
 
-.sign-in-form{
+.sign-in-form {
   max-width: 360px;
 }
 
@@ -53,7 +53,7 @@
   border: 1px solid #414141;
 }
 
-.info-container{
+.info-container {
   max-width: 900px;
   text-align: center;
 }
@@ -64,11 +64,11 @@
   margin-bottom: 20px;
 }
 
-.info-text{
+.info-text {
   font-size: 20px;
 }
 
-.sign-in-icons{
+.sign-in-icons {
   margin: 20px 0px;
 }
 
@@ -85,4 +85,12 @@
 
 .down-arrow {
   width: 50px;
+}
+
+.login-error {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  text-align: center;
+  color: red;
 }

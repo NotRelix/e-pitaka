@@ -32,6 +32,8 @@ function SignUpForm({ handleLogin, setUsername }) {
 
     if (username) {
       checkUsername();
+    } else {
+      setUserExists(false)
     }
   }, [username])
 
@@ -102,9 +104,9 @@ function SignUpForm({ handleLogin, setUsername }) {
       <div className="card text-center form-container sign-up-form">
         <form onSubmit={handleSubmit}>
           <h3>CREATE ACCOUNT</h3>
-          {userExists && <p className='text-danger'>Username Already Exists</p>}
-          {password != confirmPassword && confirmPassword && <p className='text-danger'>Passwords Do Not Match</p>}
-          {emailExists && <p className='text-danger'>Email Has Already Been Taken</p>}
+          {userExists && <p className='sign-up-error'>Username Already Exists</p>}
+          {password != confirmPassword && confirmPassword && <p className='sign-up-error'>Passwords Do Not Match</p>}
+          {emailExists && <p className='sign-up-error'>Email Has Already Been Taken</p>}
           <div className="row input-area">
             <div className="col-sm">
               <label>First Name</label>

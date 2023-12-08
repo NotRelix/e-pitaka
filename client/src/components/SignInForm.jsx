@@ -6,7 +6,8 @@ function SignInForm({ handleLogin, setUsername, setUserType}) {
   const navigate = useNavigate();
   const [username, setUsernameLocal] = useState('');
   const [password, setPassword] = useState('');
-  const [userExists, setUserExists] = useState(false);
+  const [userExists, setUserExists] = useState(true);
+  const [showError, setShowError] = useState(false);
 
   const handleChange = (e, SetFn) => {
     SetFn(e.target.value);
@@ -15,6 +16,10 @@ function SignInForm({ handleLogin, setUsername, setUserType}) {
   const handleToken = (token) => {
     localStorage.setItem('token', token)
   }
+
+  useEffect(() => {
+    setShowError(false)
+  }, [username, password])
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -52,6 +57,7 @@ function SignInForm({ handleLogin, setUsername, setUserType}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userExists) {
+      setShowError(true)
       console.error("User Doesn't Exist");
       return;
     }
@@ -65,6 +71,7 @@ function SignInForm({ handleLogin, setUsername, setUserType}) {
         <form onSubmit={handleSubmit}>
           <h3>SIGN IN</h3>
           <div className="input-area">
+            { showError && <p className="login-error">User Doesn't Exist</p> }
             <label>Your Username</label>
             <input
               onChange={(e) => {
