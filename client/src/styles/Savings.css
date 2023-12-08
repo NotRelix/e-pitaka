@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 350px;
   margin: auto;
   margin-bottom: 100px;

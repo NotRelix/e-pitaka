@@ -396,6 +396,26 @@ app.get("/user-list", (req, res) => {
   );
 });
 
+app.get("/get-summaries/:userId", (req, res) => {
+  try {
+    const userId = req.params.userId;
+    conn.query(
+      "SELECT * FROM summary WHERE Account_ID = ?",
+      [userId],
+      (err, data) => {
+        if (err) {
+          console.error("Failed to fetch summary");
+          return res.status(500).json({ error: "Failed to fetch summary" })
+        }
+        res.json({data})
+      }
+    )
+  } catch (err) {
+    console.error("Error fetching summaries:", err);
+    return res.status(500).json({ error: "Internal server error" })
+  }
+})
+
 app.patch("/edit-user/:username", async (req, res) => {
   const username = req.params.username;
   const { firstName, lastName } = req.body;
