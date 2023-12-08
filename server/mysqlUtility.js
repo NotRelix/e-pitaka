@@ -7,6 +7,8 @@ const conn = sql.createConnection({
     database: 'epitaka-db'
 })
 
+
+// For the Send Functionality
 async function findUserById(userId) {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -78,4 +80,43 @@ async function saveAdminTransaction(amount, transaction_type, account_id) {
     })
 }
 
-module.exports = { findUserById, updateUserBalance, saveTransaction, saveAdminTransaction };
+// For the Charts
+async function checkIfSummaryExists(year, month, account_id) {
+    const sql = `
+        SELECT COUNT(*) AS count
+        FROM summary
+        WHERE YEAR(Month) = ${year} AND MONTH(Month) = ${month} AND Account_ID = ${account_id}
+    `;
+
+    const [result] = await conn.promise().query(sql);
+    return result[0].count > 0;
+}
+
+async function updateSummary(year, month, endBalance, account_id) {
+    const sql = `
+        UPDATE summary
+        SET End_Value = ${endBalance}
+        WHERE YEAR(Month) = ${year} AND MONTH(Month) = ${month} AND Account_ID = ${account_id}
+    `;
+
+    await conn.promise().query(sql);
+}
+
+async function insertNewSummary(year, month, day, startBalance, endBalance, account_id) {
+    const sql = `
+        INSERT INTO summary (Month, Init_Value, End_Value, Account_ID)
+        VALUES ('${year}-${month}-${day}', ${startBalance}, ${endBalance}, ${account_id})
+    `;
+
+    await conn.promise().query(sql);
+}
+
+module.exports = {
+    findUserById,
+    updateUserBalance,
+    saveTransaction,
+    saveAdminTransaction,
+    checkIfSummaryExists,
+    updateSummary,
+    insertNewSummary,
+};

@@ -11,6 +11,9 @@ const {
   updateUserBalance,
   saveTransaction,
   saveAdminTransaction,
+  checkIfSummaryExists,
+  updateSummary,
+  insertNewSummary,
 } = require("./mysqlUtility");
 
 const saltRounds = 10;
@@ -105,13 +108,13 @@ app.get("/check-username/:username", (req, res) => {
       const usernameExists = data.length > 0;
       const userInfo = usernameExists
         ? {
-            id: data[0].Account_ID,
-            username: data[0].Username,
-            password: data[0].Password,
-            balance: data[0].Balance,
-            firstName: data[0].FName,
-            lastName: data[0].LName,
-          }
+          id: data[0].Account_ID,
+          username: data[0].Username,
+          password: data[0].Password,
+          balance: data[0].Balance,
+          firstName: data[0].FName,
+          lastName: data[0].LName,
+        }
         : null;
 
       console.log(userInfo);
@@ -188,14 +191,14 @@ app.post("/check-username/:username", async (req, res) => {
 
 app.post(
   "/logout",
-  /*verifyToken,*/ (req, res) => {
+  /*verifyToken,*/(req, res) => {
     res.json({ success: true, message: "Logout is Successful" });
   }
 );
 
 app.get(
   "/user-balance/:username",
-  /*verifyToken,*/ (req, res) => {
+  /*verifyToken,*/(req, res) => {
     const username = req.params.username;
     conn.query(
       "SELECT `Balance` FROM `account` WHERE `Username` = ?",
@@ -216,6 +219,10 @@ app.get(
 
 app.post("/api/transfer", async (req, res) => {
   const { senderID, receiverID, amount, note } = req.body;
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay()
+  const currentMonth = currentDate.getMonth() + 1
+  const currentYear = currentDate.getFullYear()
 
   try {
     const sender = await findUserById(senderID);
@@ -242,6 +249,21 @@ app.post("/api/transfer", async (req, res) => {
 
     await saveTransaction(senderID, receiverID, amount, note);
 
+    const entryExistsSender = await checkIfSummaryExists(currentYear, currentMonth, senderID)
+    const entryExistsReceiver = await checkIfSummaryExists(currentYear, currentMonth, receiverID);
+
+    if (entryExistsSender) {
+      await updateSummary(currentYear, currentMonth, parseFloat(sender.balance) - parseFloat(amount), senderID)
+    } else {
+      await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(sender.balance), parseFloat(sender.balance) - parseFloat(amount), senderID)
+    }
+
+    if (entryExistsReceiver) {
+      await updateSummary(currentYear, currentMonth, parseFloat(receiver.balance) + parseFloat(amount), receiverID)
+    } else {
+      await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(receiver.balance), parseFloat(receiver.balance) + parseFloat(amount), receiverID)
+    }
+
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error("Error Processing Money Transaction:", err);
@@ -251,6 +273,10 @@ app.post("/api/transfer", async (req, res) => {
 
 app.post("/api/admin-transfer", async (req, res) => {
   const { amount, transaction_type, account_id } = req.body;
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay()
+  const currentMonth = currentDate.getMonth() + 1
+  const currentYear = currentDate.getFullYear()
 
   try {
     const account = await findUserById(account_id);
@@ -278,6 +304,22 @@ app.post("/api/admin-transfer", async (req, res) => {
     }
 
     await saveAdminTransaction(amount, transaction_type, account_id);
+
+    const entryExists = await checkIfSummaryExists(currentYear, currentMonth, account_id)
+
+    if (transaction_type === "deposit") {
+      if (entryExists) {
+        await updateSummary(currentYear, currentMonth, parseFloat(account.balance) + parseFloat(amount), account_id)
+      } else {
+        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance) + parseFloat(amount), parseFloat(account.balance) + parseFloat(amount), account_id)
+      }
+    } else {
+      if (entryExists) {
+        await updateSummary(currentYear, currentMonth, parseFloat(account.balance) - parseFloat(amount), account_id)
+      } else {
+        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance) - parseFloat(amount), parseFloat(account.balance) - parseFloat(amount), account_id)
+      }
+    }
 
     return res.status(200).json({ success: true });
   } catch (err) {
