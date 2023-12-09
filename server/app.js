@@ -316,13 +316,13 @@ app.post("/api/admin-transfer", async (req, res) => {
       if (entryExists) {
         await updateSummary(currentYear, currentMonth, parseFloat(account.balance) + parseFloat(amount), account_id)
       } else {
-        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance) + parseFloat(amount), parseFloat(account.balance) + parseFloat(amount), account_id)
+        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance), parseFloat(account.balance) + parseFloat(amount), account_id)
       }
     } else {
       if (entryExists) {
         await updateSummary(currentYear, currentMonth, parseFloat(account.balance) - parseFloat(amount), account_id)
       } else {
-        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance) - parseFloat(amount), parseFloat(account.balance) - parseFloat(amount), account_id)
+        await insertNewSummary(currentYear, currentMonth, currentDay, parseFloat(account.balance), parseFloat(account.balance) - parseFloat(amount), account_id)
       }
     }
 
