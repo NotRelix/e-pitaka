@@ -2,7 +2,7 @@
 
 Digital Payment System for Educational Institutions
 
-# Usage
+# Contribution
 
 To contribute, `Fork` this repository in your Github which can be seen on the top right.
 ![image](https://github.com/NotRelix/e-pitaka/assets/111989096/089875d8-74bc-4919-809c-b4ff11e82c79)
@@ -30,3 +30,21 @@ git push origin main                   # Makes the changes to your Forked Reposi
 
 Once that is finished, go to your Forked Repository and click on `Compare and Pull Request` to make a pull request on the actual Repository.
 Wait for the owner of the Repository to approve or suggest you to make more changes.
+
+# Usage
+
+Once you have the repository / folder of the current project, make sure to run both the client and the server.
+
+You can do this by going to that directory `cd <directory_name>` and by doing `npm run dev`.
+
+### Here's for the Client:
+
+![image](https://github.com/NotRelix/e-pitaka/assets/111989096/f10c2c69-2c38-4f67-935c-51f22d46774a)
+
+### Here's for the Server:
+
+![image](https://github.com/NotRelix/e-pitaka/assets/111989096/b76bda5c-5cbf-42bc-9723-9acd53c42723)
+
+Also, don't forget to import the `epitaka-db.sql` in XAMPP. For reference, the database should look like this.
+
+![image](https://github.com/NotRelix/e-pitaka/assets/111989096/3857e8a5-e878-4c64-adb2-0d1baa688779)
